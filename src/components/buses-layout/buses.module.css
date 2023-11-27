@@ -1,0 +1,5 @@
+.container {
+  overflow-wrap: normal;
+  min-width: 700px;
+  overflow: auto;
+}

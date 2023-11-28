@@ -1,7 +1,12 @@
 import React from "react";
+import Booking from "@/components/buses-layout/booking";
 
-const booking = () => {
-  return <div>booking</div>;
+const BookingPage = () => {
+  return (
+    <div>
+      <Booking />
+    </div>
+  );
 };
 
-export default booking;
+export default BookingPage;

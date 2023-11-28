@@ -11,7 +11,6 @@ import { useState } from "react";
 import { search } from "@/models/search-log";
 import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
-import { setsearch } from "@/store/data/search-log";
 import { useRouter } from "next/router";
 
 const Home = () => {
@@ -32,7 +31,6 @@ const Home = () => {
   );
 
   const searchHandler = () => {
-    dispatch(setsearch.searchBus(searchData));
     router.push({
       pathname: "/buses",
       query: {
@@ -40,6 +38,12 @@ const Home = () => {
       },
     });
   };
+
+  function getMaxDate() {
+    const currentDate = new Date();
+    const threeMonthsAhead = currentDate.setMonth(currentDate.getMonth() + 3);
+    return new Date(threeMonthsAhead);
+  }
 
   return (
     <>
@@ -72,7 +76,7 @@ const Home = () => {
             />
             <Autocomplete
               disablePortal
-              id="from-location"
+              id="To-location"
               className={style.control}
               value={searchData?.destination}
               onChange={(event: any, newValue: string | null) => {
@@ -86,7 +90,11 @@ const Home = () => {
               renderInput={(params) => <TextField {...params} label="TO" />}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker disablePast={true} sx={{ width: 320 }} />
+              <DatePicker
+                disablePast={true}
+                sx={{ width: 300 }}
+                maxDate={getMaxDate}
+              />
             </LocalizationProvider>
             <div className={style.actions}>
               <button onClick={searchHandler}>Search Bus</button>

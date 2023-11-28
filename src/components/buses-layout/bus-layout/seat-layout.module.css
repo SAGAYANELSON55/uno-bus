@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+
+  gap: 20px;
+  padding: 10px;
+  margin: 20px;
+}
+.lowerdeck {
+  display: flex;
+  border: 2px solid #9e9d9d;
+  flex-direction: column;
+}
+
+.lowerdeck .group {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
+}
+.lowerdeck .row1 {
+  display: flex;
+}
+.lowerdeck .row2 {
+  display: flex;
+}
+
+.lowerdeck .row3 {
+  display: flex;
+  gap: 22px;
+  padding: 5px;
+  margin-top: 30px;
+}
+
+.upperdeck {
+  display: flex;
+  border: 2px solid #9e9d9d;
+  flex-direction: column;
+}
+
+.upperdeck .group {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  justify-content: space-between;
+}
+
+.upperdeck .row1 {
+  display: flex;
+  gap: 22px;
+  padding: 5px;
+}
+
+.upperdeck .row2 {
+  display: flex;
+  gap: 22px;
+  padding: 5px;
+}
+
+.upperdeck .row3 {
+  display: flex;
+  gap: 22px;
+  padding: 5px;
+  margin-top: 30px;
+}

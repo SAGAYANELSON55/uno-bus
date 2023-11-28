@@ -1,0 +1,35 @@
+.seat {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #868686;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  cursor: pointer;
+  background-color: rgb(253, 253, 253);
+}
+
+.sleeper {
+  width: 70px;
+  height: 30px;
+  border: 1px solid #868686;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: rgb(253, 253, 253);
+}
+
+.seater .booked {
+  background-color: rgb(189, 189, 186);
+  cursor: not-allowed;
+}
+
+.seater .booked .female {
+  background-color: rgb(175, 114, 117);
+}
+
+.seater .locked {
+  border: 1px solid rgb(175, 114, 117);
+}

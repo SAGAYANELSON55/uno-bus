@@ -1,18 +1,24 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { Seat } from "../../models/bus-data";
+import { SelectedSeat, Seat } from "../../models/bus-data";
 
-const initialState: Seat[] = [];
+const initialState: SelectedSeat = {
+  seats: [],
+};
 
 const seatLog = createSlice({
   name: "seat-log",
   initialState: initialState,
   reducers: {
     addSeat(state, action: PayloadAction<Seat>) {
-      state.push(action.payload);
+      if (state.seats.length !== 5) {
+        state.seats.push(action.payload);
+      }
     },
     removeSeat(state, action: PayloadAction<string>) {
-      state.filter((seat) => seat.seatNumber !== action.payload);
+      state.seats = state.seats.filter(
+        (seat) => seat.seatNumber !== action.payload
+      );
     },
   },
 });

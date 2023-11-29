@@ -9,6 +9,10 @@ export interface Seat {
   seatConstraint?: boolean;
 }
 
+export interface SelectedSeat {
+  seats: Seat[];
+}
+
 export interface Buses {
   buses: Bus[];
 }

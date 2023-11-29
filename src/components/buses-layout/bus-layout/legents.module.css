@@ -1,4 +1,23 @@
-.seat {
+.legents {
+  display: flex;
+  gap: 3rem;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+}
+.col {
+  display: flex;
+}
+
+.legent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.seater {
   width: 40px;
   height: 40px;
   border: 1px solid #868686;
@@ -8,11 +27,6 @@
   margin: 5px;
   cursor: pointer;
   background-color: rgb(253, 253, 253);
-}
-
-.seat.selected {
-  background-color: rgb(85, 83, 143);
-  color: aliceblue;
 }
 
 .sleeper {
@@ -25,29 +39,19 @@
   cursor: pointer;
   background-color: rgb(253, 253, 253);
 }
-
-.sleeper.selected {
+.seater.selected {
   background-color: rgb(85, 83, 143);
   color: aliceblue;
 }
-
 .seater.booked {
   background-color: rgb(189, 189, 186);
   cursor: not-allowed;
 }
 
-.seater.booked.female {
+.seater.booked-female {
   background-color: rgb(175, 114, 117);
 }
 
-.seater.locked {
+.seater.female-only {
   border: 1px solid rgb(175, 114, 117);
-}
-
-.seat.max {
-  cursor: not-allowed;
-}
-
-.sleeper.max {
-  cursor: not-allowed;
 }

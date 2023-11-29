@@ -1,9 +1,18 @@
 .container {
   display: flex;
+  justify-content: space-evenly;
+  overflow-y: scroll;
+}
+.seatlayout {
+  display: flex;
   border: 2px solid #7c7b7b;
-  min-width: 550px;
-  overflow: auto;
   margin: 10px;
+}
+.detailslayout {
+  display: flex;
+  border: 2px solid #7c7b7b;
+  margin: 10px;
+  flex-direction: column;
 }
 .loader {
   display: flex;
@@ -11,4 +20,31 @@
   align-items: center;
   margin-top: 10rem;
   padding: 10px;
+}
+.details {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  height: 115px;
+  background-color: #cacaca;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.col1 {
+  margin-top: 4px;
+  margin-right: 2rem;
+}
+.col2 {
+  margin-top: 4px;
 }

@@ -2,6 +2,7 @@ import React from "react";
 import style from "./seat-layout.module.css";
 import { Bus } from "@/models/bus-data";
 import Seats from "./seat";
+import Legents from "./legents";
 
 const Seatlayout: React.FC<{ busData: Bus[] }> = ({ busData }) => {
   const busDetails = busData && busData[0];
@@ -53,9 +54,8 @@ const Seatlayout: React.FC<{ busData: Bus[] }> = ({ busData }) => {
             </div>
           </div>
         </div>
+        <Legents />
       </div>
-
-      <div className={style.legents}></div>
     </div>
   );
 };

@@ -1,4 +1,78 @@
-td,
-th {
-  border: 1px solid #838282;
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.table-container {
+  width: 100%;
+  margin: 0 auto;
+  min-width: 500px;
+  border-collapse: collapse;
+}
+
+.sno {
+  width: 32px;
+}
+.name {
+  width: 200px;
+}
+.Age {
+  width: 80px;
+}
+.seatno {
+  width: 60px;
+}
+
+.gender {
+  width: 100px;
+}
+
+.table-container .table-header {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.table-container {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.table-container input,
+.table-container select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+.submitbutton {
+  display: flex;
+  align-self: flex-end;
+}
+
+.submitbutton button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  font-size: medium;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.submitbutton button:hover {
+  background-color: #0056b3;
+  border: 1px solid #0c0c0c00;
+}
+
+.submitbutton button:disabled {
+  background-color: rgb(170, 170, 184);
+  cursor: not-allowed;
+}
+
+.notify {
+  color: red;
+  padding: 10px;
+}
+
+.table-container table {
+  border-collapse: separate;
+  border-spacing: 20px;
 }

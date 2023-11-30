@@ -13,12 +13,12 @@ const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
   const dispatch: AppDispatch = useDispatch();
 
   const bookingHandler = useCallback(() => {
+    console.log(seats.length);
     if (seats.length !== 5 && !data.booked) {
       setSelect((prev) => {
         return !prev;
       });
-      console.log(seats.length);
-      console.log(select);
+
       if (!select) {
         dispatch(
           setSeatLog.addSeat({
@@ -31,6 +31,7 @@ const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
       }
     }
     if (select) {
+      setSelect(false);
       dispatch(setSeatLog.removeSeat(data.seatNumber));
     }
   }, [data, dispatch, select, seats]);

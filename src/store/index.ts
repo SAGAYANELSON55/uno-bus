@@ -25,7 +25,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "@/helpers/storage";
+
 import seatLog from "./data/seat-details";
 
 const combinedReducer = combineReducers({
@@ -33,6 +34,7 @@ const combinedReducer = combineReducers({
   seatLog: seatLog,
 });
 
+typeof window != "undefined";
 const persistConfig = {
   key: "busTicketBookingApp",
   storage,

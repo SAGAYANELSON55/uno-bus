@@ -18,3 +18,9 @@ export const isPassword = (value: string) => {
 export const isEquals = (value: string, otherValue: string) => {
   return value === otherValue;
 };
+
+export const isalpha = (value: string) => {
+  const regex = /^[a-zA-Z]+$/;
+  console.log(regex.test(value));
+  return regex.test(value);
+};

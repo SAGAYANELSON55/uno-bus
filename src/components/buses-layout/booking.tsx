@@ -35,8 +35,6 @@ const Booking = () => {
   }
 
   const data = buses[0];
-  
-  console.log(updateBusdata(data,seatDetail));
 
   return (
     <>
@@ -46,25 +44,26 @@ const Booking = () => {
             <Seatlayout busData={buses} />
           </div>
           <div className={style.detailslayout}>
-            <div className={style.details}>
-              <div className={style.wrapper}>
-                <h2>{data.busName}</h2>
-                <div className={style.detail}>
-                  <div className={style.col1}>
-                    <p>Bus No: {data.busNo}</p>
-                    <p>Source: {data.source}</p>
-                    <p>Destination: {data.destination}</p>
-                  </div>
-                  <div className={style.col2}>
-                    <p>Departure Time: {data.departureTime}</p>
-                    <p>Arrival Time: {data.arrivalTime}</p>
-                    <p>Model: {data.model}</p>
-                  </div>
+            <div className={style.wrapper}>
+              <h2>{data.busName}</h2>
+              <div className={style.detail}>
+                <div className={style.col1}>
+                  <p>Bus No: {data.busNo}</p>
+                  <p>Source: {data.source}</p>
+                  <p>Destination: {data.destination}</p>
+                </div>
+                <div className={style.col2}>
+                  <p>Departure Time: {data.departureTime}</p>
+                  <p>Arrival Time: {data.arrivalTime}</p>
+                  <p>Model: {data.model}</p>
                 </div>
               </div>
             </div>
-            <div>
-              <Details />
+            <div className={style.passenger}>
+              <h2>Passenger Details</h2>
+              <div>
+                <Details />
+              </div>
             </div>
           </div>
         </div>

@@ -20,6 +20,15 @@ const seatLog = createSlice({
         (seat) => seat.seatNumber !== action.payload
       );
     },
+    addName(state, action: PayloadAction<{ name: string; index: number }>) {
+      state.seats[action.payload.index].name = action.payload.name;
+    },
+    addAge(state, action: PayloadAction<{ age: string; index: number }>) {
+      state.seats[action.payload.index].age = +action.payload.age;
+    },
+    addGender(state, action: PayloadAction<{ gender: string; index: number }>) {
+      state.seats[action.payload.index].gender = action.payload.gender;
+    },
   },
 });
 

@@ -1,73 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import style from "./details.module.css";
+import DetailsForm from "./deatils-form";
 
 const Details = () => {
   const seatDetail = useSelector((state: RootState) => state.seatLog.seats);
+
+  const [invalid, setinValid] = useState(true);
+
+  useEffect(() => {
+    const seats = seatDetail.filter(
+      (seat) => seat.name && seat.age && seat.gender
+    );
+    console.log(seats);
+    setinValid(seatDetail.length ? seatDetail.length !== seats.length : false);
+  }, []);
+
   return (
     <>
       {seatDetail && (
-        <div>
-          <form>
-            <table>
-              <tbody>
-                <tr>
-                  <th>
-                    <label htmlFor="sno">S.No</label>
-                  </th>
-                  <th>
-                    <label htmlFor="name">Name</label>
-                  </th>
-                  <th>
-                    <label htmlFor="age">Age</label>
-                  </th>
-                  <th>
-                    <label htmlFor="gender">Gender</label>
-                  </th>
-                  <th>
-                    <label htmlFor="SeatNo">SeatNo</label>
-                  </th>
-                </tr>
-                <tr>
-                  <td>{seatDetail.length}</td>
-                  <td>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={seatDetail[0]?.name}
-                      //   onChange={handleChange}
-                    />
-                  </td>
-
-                  <td>
-                    <input
-                      type="number"
-                      id="age"
-                      name="age"
-                      value={seatDetail[0]?.age}
-                      //   onChange={handleChange}
-                    />
-                  </td>
-                  <td>
-                    <select
-                      id="gender"
-                      name="gender"
-                      value={seatDetail[0]?.gender}
-                      //   onChange={handleChange}
-                    >
-                      <option value="">Select Gender</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </td>
-                  <td>{seatDetail[0]?.seatNumber}</td>
-                </tr>
-              </tbody>
-            </table>
-            <button type="submit">Submit</button>
-          </form>
+        <div className={style.container}>
+          <div className={style["table-container"]}>
+            <form>
+              <table>
+                <thead>
+                  <tr className={style["table-header"]}>
+                    <th className={style.sno}>S.No</th>
+                    <th className={style.name}>Name</th>
+                    <th className={style.Age}>Age</th>
+                    <th className={style.gender}>Gender</th>
+                    <th className={style.seatno}>SeatNo</th>
+                  </tr>
+                </thead>
+                <tbody className={style.content}>
+                  {seatDetail.length !== 0 &&
+                    seatDetail.map((seat, index) => {
+                      return (
+                        <DetailsForm
+                          key={seat.seatNumber}
+                          seat={seat}
+                          index={index}
+                        />
+                      );
+                    })}
+                </tbody>
+              </table>
+            </form>
+          </div>
+          <div>
+            {seatDetail.length === 5 && (
+              <p className={style.notify}>Max booking five seats only*</p>
+            )}
+          </div>
+          <div className={style.submitbutton}>
+            <button type="submit" disabled={invalid}>
+              continue
+            </button>
+          </div>
         </div>
       )}
     </>

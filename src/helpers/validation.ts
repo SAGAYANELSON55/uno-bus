@@ -21,6 +21,5 @@ export const isEquals = (value: string, otherValue: string) => {
 
 export const isalpha = (value: string) => {
   const regex = /^[a-zA-Z]+$/;
-  console.log(regex.test(value));
   return regex.test(value);
 };

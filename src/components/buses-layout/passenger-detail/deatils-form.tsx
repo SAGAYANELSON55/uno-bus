@@ -1,5 +1,5 @@
 import { Seat } from "@/models/bus-data";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { isNotEmpty, hasMinLength, isalpha } from "@/helpers/validation";
 import style from "./deatils-form.module.css";
 import { setSeatLog } from "@/store/data/seat-details";
@@ -35,9 +35,8 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
       didEdit.age && (+enteredValues.age < 5 || +enteredValues.age > 100);
 
     const ageValid =
-      (+enteredValues.age < 5 && +enteredValues.age > 100) ||
+      (+enteredValues.age > 5 && +enteredValues.age < 100) ||
       enteredValues.age === "";
-    console.log(enteredValues.name, didEdit.name, nameIsInvalid);
 
     const handleInputChange = useCallback(
       (identifier: string, value: string) => {
@@ -67,17 +66,21 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
       }));
     }, []);
 
-    if (didEdit.name && nameValid) {
-      dispatch(setSeatLog.addName({ name: enteredValues.name, index }));
-    }
+    console.log(ageValid);
 
-    if (didEdit.age && ageValid) {
-      dispatch(setSeatLog.addAge({ age: enteredValues.age, index }));
-    }
+    useEffect(() => {
+      if (didEdit.name && nameValid) {
+        dispatch(setSeatLog.addName({ name: enteredValues.name, index }));
+      }
 
-    if (didEdit.gender) {
-      dispatch(setSeatLog.addGender({ gender: enteredValues.gender, index }));
-    }
+      if (didEdit.age && ageValid) {
+        dispatch(setSeatLog.addAge({ age: enteredValues.age, index }));
+      }
+
+      if (didEdit.gender) {
+        dispatch(setSeatLog.addGender({ gender: enteredValues.gender, index }));
+      }
+    }, [nameValid, ageValid, didEdit, dispatch, enteredValues, index]);
 
     return (
       <tr key={seat.seatNumber}>
@@ -86,8 +89,9 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
           <div className={style.container}>
             <input
               type="text"
-              id="name"
+              id={`name-${seat.seatNumber}`}
               name="name"
+              autoComplete="name"
               value={enteredValues.name}
               onChange={(event) =>
                 handleInputChange("name", event.target.value)
@@ -103,8 +107,9 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
           <div className={style.container}>
             <input
               type="number"
-              id="age"
+              id={`age-${seat.seatNumber}`}
               name="age"
+              autoComplete="number"
               value={enteredValues.age}
               min={5}
               max={100}
@@ -117,7 +122,7 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
         <td>
           {seat.seatConstraint ? (
             <select
-              id="gender"
+              id={`gender-${seat.seatNumber}`}
               name="gender"
               defaultValue="Female"
               onChange={(event) =>
@@ -128,7 +133,7 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
             </select>
           ) : (
             <select
-              id="gender"
+              id={`gender-${seat.seatNumber}`}
               name="gender"
               value={enteredValues.gender}
               onChange={(event) =>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./auth.module.css";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -13,6 +13,7 @@ import { LoginProps } from "@/models/util";
 const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
   const [inputError, setInputError] = useState(false);
   const [login, setLogin] = useState(false);
+  const [invalid, setinValid] = useState(true);
   const router = useRouter();
   const initialInput = {
     email: "",
@@ -28,26 +29,19 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
 
   let emailIsInvalid =
     didEdit.email &&
-    !isEmail(enteredValues.email) &&
-    !isNotEmpty(enteredValues.email);
+    (!isEmail(enteredValues.email) || !isNotEmpty(enteredValues.email));
   let passwordIsInvalid =
     didEdit.email &&
-    !isPassword(enteredValues.password) &&
-    !hasMinLength(enteredValues.password, 8);
+    (!isPassword(enteredValues.password) ||
+      !hasMinLength(enteredValues.password, 8));
 
-  console.log(passwordIsInvalid, emailIsInvalid);
+  console.log(emailIsInvalid, passwordIsInvalid);
 
   function handleInputChange(identifier: string, value: string) {
     setEnteredValues((prevValues) => ({
       ...prevValues,
       [identifier]: value,
     }));
-    if (identifier === "password" || identifier === "confirmPassword") {
-      setDidEdit((prevEdit) => ({
-        ...prevEdit,
-        [identifier]: true,
-      }));
-    }
     setDidEdit((prevEdit) => ({
       ...prevEdit,
       [identifier]: false,
@@ -93,6 +87,7 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
             type="email"
             id="email"
             placeholder="example@gmail.com"
+            autoComplete="email"
             value={enteredValues.email}
             onChange={(event) => handleInputChange("email", event.target.value)}
             onBlur={() => handleInputBlur("email")}
@@ -131,7 +126,7 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
           </div>
         )}
         <div className={classes.actions}>
-          <button disabled={!emailIsInvalid && !passwordIsInvalid}>
+          <button disabled={emailIsInvalid && passwordIsInvalid}>
             {login ? "Loging.." : "Login"}
           </button>
 

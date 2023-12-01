@@ -1,3 +1,5 @@
+import { Seat, Bus } from "./bus-data";
+
 export type SessionStartegy = "jwt";
 
 export interface LoginProps {
@@ -6,4 +8,10 @@ export interface LoginProps {
 
 export interface SignupProps {
   switch: () => void;
+}
+
+export interface confirmProps {
+  seats: Seat[];
+  bus: Bus;
+  onClose: () => void;
 }

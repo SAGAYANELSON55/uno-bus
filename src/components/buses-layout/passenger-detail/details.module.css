@@ -72,6 +72,12 @@
   padding: 10px;
 }
 
+.price {
+  display: flex;
+  padding: 5px;
+  color: rgb(17, 34, 105);
+}
+
 .table-container table {
   border-collapse: separate;
   border-spacing: 20px;

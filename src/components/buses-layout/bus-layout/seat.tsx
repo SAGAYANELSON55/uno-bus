@@ -43,13 +43,16 @@ const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
   } ${data.seatConstraint}`;
 
   return (
-    <div
-      className={cssClass}
-      key={data.seatNumber}
-      id={data.seatNumber}
-      onClick={bookingHandler}
-    >
-      {data.seatNumber}
+    <div>
+      <div
+        className={cssClass}
+        key={data.seatNumber}
+        id={data.seatNumber}
+        onClick={bookingHandler}
+      >
+        {data.seatNumber}
+      </div>
+      <div className={style.price}>{`₨ ${data.price}`}</div>
     </div>
   );
 });

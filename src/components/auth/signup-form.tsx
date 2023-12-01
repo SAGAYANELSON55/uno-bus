@@ -114,6 +114,7 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
         setEmailError(result.message);
         throw new Error("unable to create the user");
       }
+      switchHandler();
       setCreateAccount(false);
       setEnteredValues(initialInput);
       console.log(result.message);

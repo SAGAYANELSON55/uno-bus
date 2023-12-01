@@ -4,7 +4,7 @@ import { connectTo } from "@/helpers/connect-to";
 import { verifyPassword } from "@/helpers/auth";
 import { SessionStartegy } from "@/models/util";
 
-const authOptions = {
+export const authOptions = {
   secret: process.env.AUTH_SECRET,
   session: { strategy: "jwt" as SessionStartegy },
   jwt: {

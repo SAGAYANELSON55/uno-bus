@@ -1,58 +1,20 @@
-import React, { useState } from "react";
-import style from "./payment.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "@/store";
+import React from "react";
+import style from "./confirm.module.css";
+import { confirmProps } from "@/models/util";
+import PassengerTable from "./confirm-form";
 import { useRouter } from "next/router";
-import { CircularProgress } from "@mui/material";
-import PassengerTable from "../buses-layout/passenger-detail/confirm/confirm-form";
-import { Alert, Snackbar } from "@mui/material";
 
-const Payment = () => {
+const Confirm: React.FC<confirmProps> = ({ seats, bus, onClose }) => {
   const router = useRouter();
-  const busNo = router.query.busno && router.query.busno.toString();
-  const dispatch: AppDispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const buses = useSelector((state: RootState) => state.busData.busData.buses);
-  const seats = useSelector((state: RootState) => state.seatLog.seats);
 
-  if (!busNo) {
-    return (
-      <div className={style.loader}>
-        <CircularProgress />
-      </div>
-    );
+  function paymentHandler() {
+    router.replace({
+      pathname: `/payment`,
+      query: { busno: `${bus.busNo}` },
+    });
   }
-
-  const bus = buses.filter((bus) => bus.busNo === busNo)[0];
-
-  function notify() {
-    setOpen(true);
-    setInterval(() => router.replace("/"), 3000);
-  }
-
-  const close = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   return (
-    <>
-      {open && (
-        <Snackbar
-          open={open}
-          autoHideDuration={3000}
-          onClose={close}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-          <Alert onClose={close} severity="success" sx={{ width: "100%" }}>
-            Payment successfull
-          </Alert>
-        </Snackbar>
-      )}
-
+    <dialog className={style.container}>
       <div className={style.modal}>
         <div className={style.details}>
           <div className={style.wrapper}>
@@ -98,13 +60,16 @@ const Payment = () => {
           </p>
         )}
         <form method="dialog">
-          <button className={style.paybutton} onClick={notify}>
-            Pay
+          <button className={style.paybutton} onClick={paymentHandler}>
+            confirm
+          </button>
+          <button className={style.editbutton} onClick={() => onClose()}>
+            Edit
           </button>
         </form>
       </div>
-    </>
+    </dialog>
   );
 };
 
-export default Payment;
+export default Confirm;

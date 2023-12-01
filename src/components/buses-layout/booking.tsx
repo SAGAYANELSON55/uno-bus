@@ -10,7 +10,6 @@ import { updateBusdata } from "@/helpers/seat-update";
 
 const Booking = () => {
   const busData = useSelector((state: RootState) => state.busData.busData);
-  const seatDetail = useSelector((state: RootState) => state.seatLog.seats);
   const router = useRouter();
 
   const search = router.query.busno && router.query.busno.toString();
@@ -25,7 +24,7 @@ const Booking = () => {
     console.log("pagenot found");
     router.replace("404.tsx");
   }
-  console.log(buses);
+
   if (!search && !buses) {
     return (
       <div className={style.loader}>
@@ -62,7 +61,7 @@ const Booking = () => {
             <div className={style.passenger}>
               <h2>Passenger Details</h2>
               <div>
-                <Details />
+                <Details bus={data}/>
               </div>
             </div>
           </div>

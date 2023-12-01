@@ -51,3 +51,6 @@
 .sleeper.max {
   cursor: not-allowed;
 }
+.price {
+  font-size: smaller;
+}

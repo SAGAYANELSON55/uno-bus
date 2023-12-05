@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  position: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  border-radius: 10px;
+  align-items: center;
+  position: fixed;
+  top: 30vh;
+  left: 30%;
+  width: 40%;
+  z-index: 100;
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.col1 {
+  margin-top: 4px;
+  margin-right: 2rem;
+}
+.col2 {
+  margin-top: 4px;
+}
+
+.table-header {
+  background-color: #ebe6e6;
+  font-weight: bold;
+}
+
+.sno {
+  width: 32px;
+}
+.name {
+  width: 200px;
+}
+.Age {
+  width: 80px;
+}
+.seatno {
+  width: 60px;
+}
+
+.gender {
+  width: 100px;
+}
+.paybutton {
+  padding: 3px;
+  font-size: medium;
+  background-color: rgb(126, 117, 185);
+  margin: 10px;
+}
+
+.editbutton {
+  padding: 3px;
+  border: 0.5px solid #000;
+}

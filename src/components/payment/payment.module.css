@@ -1,0 +1,85 @@
+.card {
+  margin: 3rem auto;
+  width: 95%;
+  max-width: 22rem;
+  border-radius: 6px;
+  background-color: #ccc;
+  box-shadow: 0 1px 4px rgba(160, 163, 165, 0.2);
+  padding: 1rem;
+  text-align: center;
+}
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+  padding: 10px;
+}
+.modal {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  border-radius: 10px;
+  align-items: center;
+  position: fixed;
+  top: 30vh;
+  left: 30%;
+  width: 40%;
+  z-index: 100;
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.col1 {
+  margin-top: 4px;
+  margin-right: 2rem;
+}
+.col2 {
+  margin-top: 4px;
+}
+
+.table-header {
+  background-color: #ebe6e6;
+  font-weight: bold;
+}
+
+.sno {
+  width: 32px;
+}
+.name {
+  width: 200px;
+}
+.Age {
+  width: 80px;
+}
+.seatno {
+  width: 60px;
+}
+
+.gender {
+  width: 100px;
+}
+.paybutton {
+  padding: 3px;
+  font-size: medium;
+  background-color: rgb(126, 117, 185);
+  margin: 10px;
+}

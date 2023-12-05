@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.seatlayout {
+  display: flex;
+  border: 2px solid #7c7b7b;
+  margin: 10px;
+}
+.detailslayout {
+  display: flex;
+  border: 2px solid #7c7b7b;
+  margin: 10px;
+  flex-direction: column;
+}
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+  padding: 10px;
+}
+.details {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  height: 115px;
+  background-color: #cacaca;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  gap: 10px;
+  background-color: #cacaca;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.col1 {
+  margin-top: 4px;
+  margin-right: 2rem;
+}
+.col2 {
+  margin-top: 4px;
+}
+
+.passenger {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.passenger h2 {
+  padding-bottom: 5px;
+}

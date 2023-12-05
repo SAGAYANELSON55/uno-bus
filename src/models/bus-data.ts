@@ -11,7 +11,6 @@ export interface Seat {
 
 export interface SelectedSeat {
   seats: Seat[];
-  pathname: string;
 }
 
 export interface Buses {

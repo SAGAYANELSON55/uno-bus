@@ -3,19 +3,12 @@ import style from "./confirm.module.css";
 import { confirmProps } from "@/models/util";
 import PassengerTable from "./confirm-form";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-
-import { AppDispatch } from "@/store";
-import { setSeatLog } from "@/store/data/seat-details";
 
 const Confirm: React.FC<confirmProps> = ({ seats, bus, onClose }) => {
   const router = useRouter();
-  const dispatch: AppDispatch = useDispatch();
 
   function paymentHandler() {
-    dispatch(setSeatLog.addpath({ path: `/payment?busno=${bus.busNo}` }));
-
-    router.push({
+    router.replace({
       pathname: `/payment`,
       query: { busno: `${bus.busNo}` },
     });

@@ -82,6 +82,7 @@
 }
 
 .actions .toggle:disabled {
+  color: #ae82cc;
   cursor: not-allowed;
 }
 

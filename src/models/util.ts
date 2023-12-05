@@ -15,9 +15,3 @@ export interface confirmProps {
   bus: Bus;
   onClose: () => void;
 }
-
-export interface userData {
-  email: string;
-  name: string;
-  password: string;
-}

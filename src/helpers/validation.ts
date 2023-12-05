@@ -23,19 +23,3 @@ export const isalpha = (value: string) => {
   const regex = /^[a-zA-Z]+$/;
   return regex.test(value);
 };
-
-export const hasUppercase = (value: string) => {
-  return /[A-Z]/.test(value);
-};
-
-export const hasLowercase = (value: string) => {
-  return /[a-z]/.test(value);
-};
-
-export const hasNumber = (value: string) => {
-  return /\d/.test(value);
-};
-
-export const hasSpecialCharacter = (value: string) => {
-  return /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
-};

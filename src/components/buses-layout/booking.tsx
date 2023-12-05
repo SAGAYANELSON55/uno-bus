@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./booking.module.css";
 import Seatlayout from "./bus-layout/seat-layout";
 import { useSelector } from "react-redux";
@@ -6,13 +6,10 @@ import { RootState } from "@/store";
 import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
 import Details from "./passenger-detail/details";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store";
-import { setSeatLog } from "@/store/data/seat-details";
+import { updateBusdata } from "@/helpers/seat-update";
 
 const Booking = () => {
   const busData = useSelector((state: RootState) => state.busData.busData);
-  const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
 
   const search = router.query.busno && router.query.busno.toString();
@@ -22,10 +19,6 @@ const Booking = () => {
     search &&
     busData !== null &&
     busData.buses.filter((bus) => bus.busNo === search);
-
-  useEffect(() => {
-    dispatch(setSeatLog.clearSeats());
-  }, [dispatch]);
 
   if (search && buses && buses.length === 0) {
     console.log("pagenot found");
@@ -68,7 +61,7 @@ const Booking = () => {
             <div className={style.passenger}>
               <h2>Passenger Details</h2>
               <div>
-                <Details bus={data} />
+                <Details bus={data}/>
               </div>
             </div>
           </div>

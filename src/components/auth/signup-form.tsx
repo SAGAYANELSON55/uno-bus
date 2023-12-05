@@ -108,7 +108,6 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
     } catch (error) {
       setEmailError(error.message);
       setCreateAccount(false);
-      console.log(typeof error);
       setOpen(true);
     }
   }

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
 import PassengerTable from "../buses-layout/passenger-detail/confirm/confirm-form";
 import { Alert, Snackbar } from "@mui/material";
+import { busActions } from "@/store/data/bus-details";
 
 const Payment = () => {
   const router = useRouter();
@@ -23,11 +24,16 @@ const Payment = () => {
     );
   }
 
-  const bus = buses.filter((bus) => bus.busNo === busNo)[0];
+  if (seats.length === 0) {
+    router.replace("/");
+  }
 
-  function notify() {
-    setOpen(true);
-    setInterval(() => router.replace("/"), 3000);
+  const bus = buses.filter((bus) => bus.busNo === busNo)[0];
+  async function notify() {
+    dispatch(busActions.modifybus({ busno: bus.busNo, seats: seats }));
+    console.log(bus);
+
+    router.push("/buses/booking");
   }
 
   const close = (event?: React.SyntheticEvent | Event, reason?: string) => {

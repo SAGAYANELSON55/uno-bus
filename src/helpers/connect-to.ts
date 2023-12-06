@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { userData } from "@/models/util";
 
 let cachedClient: MongoClient | null = null;
 export async function connectTo(): Promise<MongoClient> {
@@ -14,3 +15,4 @@ export async function connectTo(): Promise<MongoClient> {
 
   return client;
 }
+

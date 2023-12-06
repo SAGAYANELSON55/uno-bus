@@ -10,10 +10,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function HomePage() {
   const dispatch: AppDispatch = useDispatch();
-
+  console.log("hello world");
   useEffect(() => {
+    console.log("hello");
+    console.log("hI");
     dispatch(fetchData());
-  }, [dispatch]);
+  });
 
   return (
     <>

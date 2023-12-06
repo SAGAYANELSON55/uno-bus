@@ -34,7 +34,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(401).json({
         message: "user already registered try login or use another email",
       });
-
+      throw new Error("user already registered try login or use another email");
       return;
     }
 
@@ -44,10 +44,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       .collection("users")
       .insertOne({ email, password: hashedPassword, name });
 
-    console.log(result);
     res.status(201).json({ message: "User Created!!!" });
     const response = result.acknowledged;
-    console.log(response);
     // return response;
   } catch (error) {
     res.status(500).json({

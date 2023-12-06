@@ -83,3 +83,7 @@
   background-color: rgb(126, 117, 185);
   margin: 10px;
 }
+
+.paybutton :hover {
+  cursor: pointer;
+}

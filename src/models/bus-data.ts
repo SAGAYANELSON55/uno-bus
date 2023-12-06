@@ -9,8 +9,13 @@ export interface Seat {
   seatConstraint?: boolean;
 }
 
+export interface search {
+  source: string | null;
+  destination: string | null;
+}
 export interface SelectedSeat {
   seats: Seat[];
+  pathname: string;
 }
 
 export interface Buses {

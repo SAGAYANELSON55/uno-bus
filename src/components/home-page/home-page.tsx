@@ -7,14 +7,15 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { useState } from "react";
-import { search } from "@/models/search-log";
+import { search } from "@/models/bus-data";
 import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
+  const [calledPush, setCalledPush] = useState(false);
   const router = useRouter();
   const busData = useSelector((state: RootState) => state.busData.busData);
   const [searchData, setSearchData] = React.useState<search>({
@@ -23,20 +24,24 @@ const Home = () => {
   });
 
   const sourceLabel = Array.from(
-    new Set(busData?.buses.map((bus) => bus.source))
+    new Set(busData?.buses?.map((bus) => bus.source))
   );
 
   const destinationLabel = Array.from(
-    new Set(busData?.buses.map((bus) => bus.destination))
+    new Set(busData?.buses?.map((bus) => bus.destination))
   );
 
   const searchHandler = () => {
+    if (calledPush) {
+      return;
+    }
     router.push({
       pathname: "/buses",
       query: {
         search: `${searchData.source} ${searchData.destination}`,
       },
     });
+    setCalledPush(true);
   };
 
   function getMaxDate() {

@@ -7,13 +7,19 @@ import {
   isNotEmpty,
   isPassword,
   hasMinLength,
+  hasLowercase,
+  hasNumber,
+  hasSpecialCharacter,
+  hasUppercase,
 } from "@/helpers/validation";
 import { LoginProps } from "@/models/util";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
+  const path = useSelector((state: RootState) => state.seatLog.pathname);
   const [inputError, setInputError] = useState(false);
   const [login, setLogin] = useState(false);
-  const [invalid, setinValid] = useState(true);
   const router = useRouter();
   const initialInput = {
     email: "",
@@ -27,17 +33,45 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
     password: false,
   });
 
-  let emailIsInvalid =
+  const emailIsInvalid =
     didEdit.email &&
     (!isEmail(enteredValues.email) || !isNotEmpty(enteredValues.email));
-  let passwordIsInvalid =
-    didEdit.email &&
-    (!isPassword(enteredValues.password) ||
-      !hasMinLength(enteredValues.password, 8));
+
+  console.log(
+    (didEdit.email && !isEmail(enteredValues.email)) ||
+      !isNotEmpty(enteredValues.email)
+  );
+
+  const passwordminLength =
+    didEdit.password && hasMinLength(enteredValues.password, 8);
+
+  const passwordhasUppercase =
+    didEdit.password && hasUppercase(enteredValues.password);
+
+  const passwordhasLowercase =
+    didEdit.password && hasLowercase(enteredValues.password);
+
+  const passwordhasSpecialcharacter =
+    didEdit.password && hasSpecialCharacter(enteredValues.password);
+
+  const passwordhasnumber =
+    didEdit.password && hasNumber(enteredValues.password);
+  // const passwordIsInvalid =
+  //   didEdit.email &&
+  //   (!isPassword(enteredValues.password) ||
+  //     !hasMinLength(enteredValues.password, 8));
+
+  const passwordIsInvalid =
+    didEdit.password &&
+    (!passwordminLength ||
+      !passwordhasLowercase ||
+      !passwordhasSpecialcharacter ||
+      !passwordhasUppercase);
 
   console.log(emailIsInvalid, passwordIsInvalid);
 
   function handleInputChange(identifier: string, value: string) {
+    setInputError(false);
     setEnteredValues((prevValues) => ({
       ...prevValues,
       [identifier]: value,
@@ -49,6 +83,7 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
   }
 
   function handleInputBlur(identifier: string) {
+    setInputError(false);
     setDidEdit((prevEdit) => ({
       ...prevEdit,
       [identifier]: true,
@@ -70,7 +105,11 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
     });
 
     if (!result!.error) {
-      router.replace("/");
+      if (path !== "") {
+        router.replace(path);
+      } else {
+        router.back();
+      }
     } else {
       setLogin(false);
       setInputError(true);
@@ -113,20 +152,45 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
             required
           />
         </div>
-        {passwordIsInvalid && (
+        {didEdit.password && !passwordminLength && (
+          <div className={classes.error}>
+            <p>*min-length=8</p>
+          </div>
+        )}
+        {didEdit.password && !passwordhasLowercase && (
+          <div className={classes.error}>
+            <p>*Aleast one lowercase</p>
+          </div>
+        )}
+        {didEdit.password && !passwordhasUppercase && (
+          <div className={classes.error}>
+            <p>*Aleast one uppercase</p>
+          </div>
+        )}
+        {didEdit.password && !passwordhasSpecialcharacter && (
+          <div className={classes.error}>
+            <p>*Aleast one special character</p>
+          </div>
+        )}
+        {didEdit.password && !passwordhasnumber && (
+          <div className={classes.error}>
+            <p>*Aleast one number</p>
+          </div>
+        )}
+        {/* {passwordIsInvalid && (
           <div className={classes.error}>
             <p>
               *password must contain 1-uppercase 1-lowercase 1-number 1-symbol
             </p>
           </div>
-        )}
+        )} */}
         {inputError && (
           <div className={classes.error}>
             <p>*Invalid email or password</p>
           </div>
         )}
         <div className={classes.actions}>
-          <button disabled={emailIsInvalid && passwordIsInvalid}>
+          <button disabled={emailIsInvalid || passwordIsInvalid}>
             {login ? "Loging.." : "Login"}
           </button>
 

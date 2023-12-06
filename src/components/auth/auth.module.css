@@ -82,8 +82,9 @@
 }
 
 .actions .toggle:disabled {
-  color: #ae82cc;
   cursor: not-allowed;
+  color: #f1e1fc;
+  background-color: none;
 }
 
 .loader {

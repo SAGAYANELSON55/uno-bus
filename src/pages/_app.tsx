@@ -74,7 +74,6 @@ export default function App({
   //     window.removeEventListener("unload", handleUnload);
   //   };
   // }, []);
-
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

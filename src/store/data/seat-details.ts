@@ -4,12 +4,16 @@ import { SelectedSeat, Seat } from "../../models/bus-data";
 
 const initialState: SelectedSeat = {
   seats: [],
+  pathname: "",
 };
 
 const seatLog = createSlice({
   name: "seat-log",
   initialState: initialState,
   reducers: {
+    clearSeats(state) {
+      state.seats = [];
+    },
     addSeat(state, action: PayloadAction<Seat>) {
       if (state.seats.length !== 5) {
         state.seats.push(action.payload);
@@ -28,6 +32,12 @@ const seatLog = createSlice({
     },
     addGender(state, action: PayloadAction<{ gender: string; index: number }>) {
       state.seats[action.payload.index].gender = action.payload.gender;
+    },
+    addpath(state, action: PayloadAction<{ path: string }>) {
+      state.pathname = action.payload.path;
+    },
+    removepath(state) {
+      state.pathname = "";
     },
   },
 });

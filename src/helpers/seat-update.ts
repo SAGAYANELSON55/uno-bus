@@ -11,14 +11,17 @@ export function updateBusdata(busData: Bus, seats: Seat[]) {
       deck === "upperDeck"
         ? `row${rows === 4 ? 1 : rows === 5 ? 2 : rows === 6 ? 3 : 0}`
         : `row${rows}`;
-    const buseSeat = busData[`${deck}`][`${row}`][col - 1];
+
+    console.log(busData[`${deck}`][`${row}`][col - 1]);
+    console.log(seat);
+    busData[`${deck}`][`${row}`][col - 1] = seat;
     if (seat.gender === "female") {
       if (rows === 1 || rows === 2 || rows === 4 || rows === 5) {
         const adjrow =
           rows === 1 ? 2 : rows === 2 ? 1 : rows === 4 ? 5 : rows === 5 ? 4 : 0;
-        const setconst = busData[`${deck}`][`${adjrow}`][col - 1];
-        console.log(setconst);
+        busData[`${deck}`][`${adjrow}`][col - 1].seatConstraint = true;
       }
     }
   });
+  return busData;
 }

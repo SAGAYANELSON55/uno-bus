@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import type { RootState } from "..";
 import type { Bus, Buses, Seat } from "@/models/bus-data";
 
 const busDetails = createSlice({

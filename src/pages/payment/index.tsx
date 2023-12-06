@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import Payment from "@/components/payment/payment";
 
+
 function payment() {
   return <Payment />;
 }

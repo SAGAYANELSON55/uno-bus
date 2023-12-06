@@ -2,16 +2,26 @@ import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "@/store";
+import { RootState } from "../../store/index";
 
-export const Paymentcompleted = () => {
+const Paymentcompleted: React.FC = () => {
   const busData = useSelector((state: RootState) => state.busData.busData);
-  const filter = useSelector((state: RootState)=> state.seatLog.pathname)
-  console.log(filter)
+  const filter = useSelector((state: RootState) => state.seatLog.pathname);
+  console.log(filter);
   const router = useRouter();
   function homeLoader() {
     router.replace("/");
   }
+
+  // async function loadData() {
+  //   const data = fetch("api/busData/updateBusDetails",{
+  //     method: 'PATCH',
+  //     headers:{
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify()
+  //   });
+  // }
   useEffect(() => {});
   return (
     <div style={{ textAlign: "center", marginTop: "250px" }}>
@@ -25,3 +35,5 @@ export const Paymentcompleted = () => {
     </div>
   );
 };
+
+export default Paymentcompleted;

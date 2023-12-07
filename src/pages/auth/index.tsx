@@ -9,7 +9,10 @@ export default function Auth() {
 
   useEffect(() => {
     getSession().then((session) => {
-      if (session) {
+      if (session?.user.name === "Admin") {
+        router.replace("/admin");
+      }
+      if (session?.user.name === "User") {
         console.log(session);
         router.replace("/");
       } else {

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import classes from "./auth.module.css";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import {
   isEmail,
   isNotEmpty,
-  isPassword,
   hasMinLength,
   hasLowercase,
   hasNumber,
@@ -20,6 +19,7 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
   const path = useSelector((state: RootState) => state.seatLog.pathname);
   const [inputError, setInputError] = useState(false);
   const [login, setLogin] = useState(false);
+  const { data: session, status } = useSession();
   const router = useRouter();
   const initialInput = {
     email: "",
@@ -56,10 +56,6 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
 
   const passwordhasnumber =
     didEdit.password && hasNumber(enteredValues.password);
-  // const passwordIsInvalid =
-  //   didEdit.email &&
-  //   (!isPassword(enteredValues.password) ||
-  //     !hasMinLength(enteredValues.password, 8));
 
   const passwordIsInvalid =
     didEdit.password &&
@@ -104,16 +100,21 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
       password: enteredValues.password,
     });
 
+    console.log(session);
     if (!result!.error) {
-      if (path !== "") {
-        router.replace(path);
-      } else {
-        router.back();
-      }
+      console.log(result);
     } else {
       setLogin(false);
       setInputError(true);
     }
+  }
+  console.log(session);
+
+  if (session?.user.name === "User") {
+    router.replace(path);
+  }
+  if (session?.user.name === "Admin") {
+    router.replace("/admin");
   }
 
   return (
@@ -177,13 +178,6 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
             <p>*Aleast one number</p>
           </div>
         )}
-        {/* {passwordIsInvalid && (
-          <div className={classes.error}>
-            <p>
-              *password must contain 1-uppercase 1-lowercase 1-number 1-symbol
-            </p>
-          </div>
-        )} */}
         {inputError && (
           <div className={classes.error}>
             <p>*Invalid email or password</p>

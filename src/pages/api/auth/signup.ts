@@ -38,14 +38,22 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return;
     }
 
-    const hashedPassword = await hashPassword(password);
+    let result;
 
-    const result = await db
-      .collection("users")
-      .insertOne({ email, password: hashedPassword, name });
+    const hashedPassword = await hashPassword(password);
+    if (name === "BusAdmin") {
+      result = await db
+        .collection("users")
+        .insertOne({ email, password: hashedPassword, name, isAdmin: true });
+    } else {
+      result = await db
+        .collection("users")
+        .insertOne({ email, password: hashedPassword, name, isAdmin: false });
+    }
 
     res.status(201).json({ message: "User Created!!!" });
     const response = result.acknowledged;
+    console.log(response);
     // return response;
   } catch (error) {
     res.status(500).json({

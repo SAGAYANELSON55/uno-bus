@@ -26,12 +26,28 @@
 
 .header li {
   margin: 0 1rem;
+  font-size: large;
 }
 
 .header a {
   text-decoration: none;
   color: white;
   font-weight: bold;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 3rem;
+}
+
+.link {
+  padding: 0.5rem 1rem;
+}
+.link.active-Link {
+  border: 1px solid #d8cfdf;
+  border-radius: 6px;
 }
 
 .header button {

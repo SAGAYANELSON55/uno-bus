@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/index";
+import { RootState, AppDispatch } from "../../store/index";
 import { BookingLog } from "@/models/bus-data";
+import { setSeatLog } from "@/store/data/seat-details";
 
 const PaymentCompleted: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
   const busData = useSelector((state: RootState) => state.busData.busData);
 
   const seatData = useSelector((state: RootState) => state.seatLog);
@@ -32,10 +34,6 @@ const PaymentCompleted: React.FC = () => {
   console.log(timestamp);
 
   const router = useRouter();
-  function homeLoader() {
-    window.history.replaceState({}, "", "/");
-    router.push("/");
-  }
 
   useEffect(() => {
     const bookingLog: BookingLog = {
@@ -86,6 +84,13 @@ const PaymentCompleted: React.FC = () => {
     loadbooking();
     loadData();
   });
+
+  function homeLoader() {
+    dispatch(setSeatLog.removepath());
+    window.history.replaceState({}, "", "/");
+    router.push("/");
+  }
+
   return (
     <div style={{ textAlign: "center", marginTop: "250px" }}>
       <h2>Payment Completed</h2>

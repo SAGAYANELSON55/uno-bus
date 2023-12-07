@@ -43,14 +43,15 @@
   font: inherit;
 
   color: white;
-  background-color: #32388f;
-  border: 1px solid #d5d5da;
+
+  background-color: #6a6cdb;
+  border: 1px solid #e5e5eb;
   border-radius: 4px;
   padding: 0.5rem 2.5rem;
 }
 
 .actions button:hover {
-  background-color: #6a6cdb;
+  background-color: #32388f;
   border-color: #fcfcff;
 }
 

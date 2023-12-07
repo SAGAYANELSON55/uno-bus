@@ -29,9 +29,20 @@ export const authOptions = {
 
         const userCollection = db.collection("users");
 
-        const user = await userCollection.findOne({
+        // const user = await userCollection.findOne({
+        //   email: credentials!.email,
+        // });
+
+        const userPromise = userCollection.findOne({
           email: credentials!.email,
         });
+        const isAdminPromise = userPromise.then((user) => user?.isAdmin);
+
+        const results = await Promise.all([userPromise, isAdminPromise]);
+        const user = results[0];
+        const isAdmin = results[1];
+
+        console.log(isAdmin);
 
         if (!user) {
           console.log("user is not there ");
@@ -47,8 +58,12 @@ export const authOptions = {
           console.log("incorrect password");
           return null;
         }
-
-        return { id: user._id.toString(), email: user.email, name: user.name };
+        console.log(user.isAdmin);
+        return {
+          id: user._id.toString(),
+          email: user.email,
+          name: user.isAdmin === true ? "Admin" : "User",
+        };
       },
     }),
   ],

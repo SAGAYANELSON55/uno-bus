@@ -1,6 +1,6 @@
 import { Autocomplete, Button, Stack, TextField } from "@mui/material";
 import style from "./home-page.module.css";
-import React from "react";
+import React, { useEffect } from "react";
 import DirectionsBusFilledIcon from "@mui/icons-material/DirectionsBusFilled";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

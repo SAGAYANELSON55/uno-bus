@@ -21,3 +21,7 @@ export interface userData {
   name: string;
   password: string;
 }
+
+export interface Props {
+  children: React.ReactNode;
+}

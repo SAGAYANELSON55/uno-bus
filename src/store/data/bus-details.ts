@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import type { Bus, Buses, Seat } from "@/models/bus-data";
+import Seats from "@/components/buses-layout/bus-layout/seat";
 
 const busDetails = createSlice({
   name: "Bus-details",
@@ -28,7 +29,7 @@ const busDetails = createSlice({
             existingbus[`${deck}`][`${row}`][col - 1] = seat;
             if (seat.gender === "female") {
               if (rows === 1 || rows === 2 || rows === 4 || rows === 5) {
-                const adjrow =
+                const adjacentrow =
                   rows === 1
                     ? 2
                     : rows === 2
@@ -38,12 +39,18 @@ const busDetails = createSlice({
                     : rows === 5
                     ? 4
                     : 0;
-                console.log(adjrow);
-                existingbus[`${deck}`][`row${adjrow}`][col - 1].seatConstraint =
+                const adjrow =
+                  deck === "upperDeck"
+                    ? `row${adjacentrow === 4 ? 1 : adjacentrow === 5 ? 2 : 0}`
+                    : `row${adjacentrow}`;
+                existingbus[`${deck}`][`${adjrow}`][col - 1].seatConstraint =
                   true;
               }
             }
           });
+          existingbus.availSeats =
+            existingbus.availSeats - action.payload.seats.length;
+
           return existingbus;
         }
         return bus;

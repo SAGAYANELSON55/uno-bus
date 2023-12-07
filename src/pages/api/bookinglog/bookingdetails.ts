@@ -6,28 +6,24 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<Array<Buses> | undefined> {
-  if (req.method !== "PATCH") {
+  if (req.method !== "PUT") {
     res.status(402).json({ message: "bad request" });
     return;
   }
 
-  const updatedData = await req.body;
-
-  console.log(updatedData[0]);
+  const bookingData = await req.body;
 
   try {
     const client = await connectTo();
 
     const db = client.db();
 
-    const collection = db.collection<Buses>("Buses");
+    const collection = db.collection<Buses>("Booking");
     console.log("working on database");
-    const data = await collection.findOneAndUpdate(
-      { "buses.busNo": updatedData[0].busNo },
-      { $set: { "buses.$": updatedData[0] } }
-    );
+    const data = await collection.insertOne(bookingData);
 
-    const response = data.buses;
+    const response = data.acknowledged;
+    console.log(response);
 
     res.status(200).json({ message: "data updated successfully" });
   } catch (error) {

@@ -30,17 +30,28 @@
   background-color: rgb(85, 83, 143);
   color: aliceblue;
 }
+.sleeper.booked {
+  background-color: rgb(189, 189, 189);
+  cursor: not-allowed;
+}
+.sleeper.booked.female {
+  background-color: rgb(175, 114, 117);
+}
+.sleeper.locked {
+  border: 1px solid rgb(175, 114, 117);
+}
 
-.seater.booked {
-  background-color: rgb(189, 189, 186);
+/*seater*/
+.seat.booked {
+  background-color: rgb(189, 189, 189);
   cursor: not-allowed;
 }
 
-.seater.booked.female {
+.seat.booked.female {
   background-color: rgb(175, 114, 117);
 }
 
-.seater.locked {
+.seat.locked {
   border: 1px solid rgb(175, 114, 117);
 }
 

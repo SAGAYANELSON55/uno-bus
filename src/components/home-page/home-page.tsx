@@ -11,7 +11,8 @@ import { search } from "@/models/bus-data";
 import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import dayjs from "dayjs";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -44,11 +45,8 @@ const Home = () => {
     setCalledPush(true);
   };
 
-  function getMaxDate() {
-    const currentDate = new Date();
-    const threeMonthsAhead = currentDate.setMonth(currentDate.getMonth() + 3);
-    return new Date(threeMonthsAhead);
-  }
+  const today = dayjs();
+  const maxDate = dayjs(today).add(1, "month").startOf("month");
 
   return (
     <>
@@ -98,7 +96,7 @@ const Home = () => {
               <DatePicker
                 disablePast={true}
                 sx={{ width: 300 }}
-                maxDate={getMaxDate}
+                maxDate={maxDate}
               />
             </LocalizationProvider>
             <div className={style.actions}>

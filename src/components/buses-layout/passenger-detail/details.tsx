@@ -15,6 +15,8 @@ const Details: React.FC<{ bus: Bus }> = ({ bus }) => {
     const seats = seatDetail.filter(
       (seat) => seat.name && seat.age && seat.gender
     );
+
+    console.log(seats);
     setinValid(seatDetail.length ? seatDetail.length !== seats.length : true);
   }, [seatDetail]);
 

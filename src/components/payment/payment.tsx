@@ -52,7 +52,6 @@ const Payment = () => {
     <>
       {!completed && (
         <>
-          {" "}
           {open && (
             <Snackbar
               open={open}

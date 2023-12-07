@@ -3,30 +3,89 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/index";
+import { BookingLog } from "@/models/bus-data";
 
 const PaymentCompleted: React.FC = () => {
   const busData = useSelector((state: RootState) => state.busData.busData);
-  const filter = useSelector((state: RootState) => state.seatLog.pathname);
-  const busno = filter.split("=")[1];
+
+  const seatData = useSelector((state: RootState) => state.seatLog);
+  const busno = seatData.pathname.split("=")[1];
+  const seats = seatData.seats;
   console.log(busno);
   const bus = busData.buses.filter((bus) => bus.busNo === busno);
   console.log(bus);
 
+  const currentdate = new Date();
+  const timestamp =
+    currentdate.getDate() +
+    "/" +
+    (currentdate.getMonth() + 1) +
+    "/" +
+    currentdate.getFullYear() +
+    " @ " +
+    currentdate.getHours() +
+    ":" +
+    currentdate.getMinutes() +
+    ":" +
+    currentdate.getSeconds();
+
+  console.log(timestamp);
+
   const router = useRouter();
   function homeLoader() {
-    router.replace("/");
+    window.history.replaceState({}, "", "/");
+    router.push("/");
   }
 
-  async function loadData() {
-    const data = fetch("api/busData/updateBusDetails", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(bus),
-    });
-  }
-  useEffect(() => {});
+  useEffect(() => {
+    const bookingLog: BookingLog = {
+      status: "successfull",
+      timestamp: timestamp,
+      uid: +new Date(),
+      busNo: busno,
+      bookedSeats: seats,
+    };
+    async function loadData() {
+      try {
+        const data = await fetch("api/busData/updatebusdetails", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bus),
+        });
+
+        if (!data.ok) {
+          const response = await data.json();
+          throw new Error(response.error);
+        }
+
+        const result = await data.json();
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    async function loadbooking() {
+      try {
+        const data = await fetch("api/bookinglog/bookingdetails", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingLog),
+        });
+
+        const response = data.json();
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    loadbooking();
+    loadData();
+  });
   return (
     <div style={{ textAlign: "center", marginTop: "250px" }}>
       <h2>Payment Completed</h2>

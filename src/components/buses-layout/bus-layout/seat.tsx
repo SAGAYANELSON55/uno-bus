@@ -25,7 +25,8 @@ const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
             seatNumber: data.seatNumber,
             seatType: data.seatType,
             price: data.price,
-            booked: data.booked,
+            booked: true,
+            seatConstraint: data.seatConstraint,
           })
         );
       }

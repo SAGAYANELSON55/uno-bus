@@ -82,6 +82,7 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
       }
     }, [nameValid, ageValid, didEdit, dispatch, enteredValues, index]);
 
+    console.log(seat);
     return (
       <tr key={seat.seatNumber}>
         <td>{index + 1}</td>
@@ -120,15 +121,16 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
           </div>
         </td>
         <td>
-          {seat.seatConstraint ? (
+          {seat.seatConstraint === true ? (
             <select
               id={`gender-${seat.seatNumber}`}
               name="gender"
-              defaultValue="Female"
+              value={enteredValues.gender}
               onChange={(event) =>
                 handleInputChange("gender", event.target.value)
               }
             >
+              <option value="">Select Gender</option>
               <option value="female">Female</option>
             </select>
           ) : (

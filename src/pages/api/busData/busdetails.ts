@@ -11,7 +11,6 @@ async function handler(
     return;
   }
 
-  console.log("working on database");
   const client = await connectTo();
 
   const db = client.db();

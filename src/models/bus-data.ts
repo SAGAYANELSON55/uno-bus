@@ -20,6 +20,7 @@ export interface SelectedSeat {
 
 export interface Buses {
   buses: Bus[];
+  model: Bus;
 }
 
 export interface Bus {

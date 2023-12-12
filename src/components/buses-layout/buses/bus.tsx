@@ -1,19 +1,71 @@
 import { Bus } from "@/models/bus-data";
 import styles from "./bus.module.css";
 import { useRouter } from "next/router";
+import { DeleteOutlined } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
+import { busActions } from "@/store/data/bus-details";
+import { useEffect } from "react";
 
 interface Props {
   data: Bus;
+  mode: string;
 }
 
-const Busitem: React.FC<Props> = ({ data }) => {
+const Busitem: React.FC<Props> = ({ data, mode }) => {
   const router = useRouter();
+  const dispatch: AppDispatch = useDispatch();
+
+  // useEffect(() => {
+  //   async function Deletion() {
+  //     try {
+  //       const result = await fetch("api/busData/updatebusdetails", {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(data),
+  //       });
+
+  //       if (!result.ok) {
+  //         const response = await result.json();
+  //         throw new Error(response.error);
+  //       }
+
+  //       const res = await result.json();
+  //       console.log(res);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+
+  //   Deletion();
+  // });
   const viewSeatHandler = () => {
+    if (mode === "Admin") {
+      router.push({
+        pathname: `/admin/buslist/viewSeat`,
+        query: { busno: `${data.busNo}` },
+      });
+    }
     router.push({
       pathname: `./buses/booking`,
       query: { busno: `${data.busNo}` },
     });
   };
+
+  function deleteHandler() {
+    console.log("deleting..");
+    dispatch(busActions.deleteBus(data.busNo));
+  }
+
+  function bookingHandler() {
+    router.push({
+      pathname: "/admin/buslist/bookinglog",
+      query: { busno: `${data.busNo}` },
+    });
+  }
+
   return (
     <div className={styles.card}>
       <div className={styles.details}>
@@ -38,6 +90,14 @@ const Busitem: React.FC<Props> = ({ data }) => {
         <button className={styles.viewSeats} onClick={viewSeatHandler}>
           View Seats
         </button>
+        {mode === "Admin" && (
+          <div className={styles.wrap}>
+            <button className={styles.booking} onClick={bookingHandler}>
+              Bookings
+            </button>
+            <DeleteOutlined className={styles.delete} onClick={deleteHandler} />
+          </div>
+        )}
       </div>
     </div>
   );

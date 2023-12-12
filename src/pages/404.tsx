@@ -1,11 +1,18 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
+import { useSession } from "next-auth/react";
 
 const Error = () => {
   const router = useRouter();
+  const { data, status } = useSession();
+
   function homeLoader() {
-    router.replace("/");
+    if (data?.user.name === "Admin") {
+      router.replace("/admin");
+    } else {
+      router.replace("/");
+    }
   }
 
   return (

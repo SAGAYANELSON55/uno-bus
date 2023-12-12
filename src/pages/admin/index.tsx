@@ -1,8 +1,15 @@
-import React from "react";
-import Buslist from "@/components/admin/buses-table";
+import React, { useEffect } from "react";
+import Home from "@/components/home-page/home-page";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
+import { fetchData } from "@/store/data/bus-details";
 
 const Admin = () => {
-  return <Buslist />;
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+  return <Home mode="Admin" />;
 };
 
 export default Admin;

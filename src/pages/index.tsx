@@ -10,10 +10,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function HomePage() {
   const dispatch: AppDispatch = useDispatch();
-  console.log("hello world");
+
   useEffect(() => {
-    console.log("hello");
-    console.log("hI");
     dispatch(fetchData());
   });
 
@@ -25,7 +23,7 @@ export default function HomePage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Home />
+      <Home mode="User" />
     </>
   );
 }

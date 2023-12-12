@@ -1,7 +1,8 @@
+import AddbusForm from "@/components/admin/addbus-form";
 import React from "react";
 
 const AddBusPage = () => {
-  return <div>AddBusPage</div>;
+  return <AddbusForm />;
 };
 
 export default AddBusPage;

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import type { Bus, Buses, Seat } from "@/models/bus-data";
-import Seats from "@/components/buses-layout/bus-layout/seat";
 
 const busDetails = createSlice({
   name: "Bus-details",
@@ -63,6 +62,11 @@ const busDetails = createSlice({
         error: null as string | null,
       };
     },
+    deleteBus(state, action: PayloadAction<string>) {
+      state.busData.buses = state.busData.buses.filter(
+        (bus) => bus.busNo !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -87,6 +91,7 @@ export const fetchData = createAsyncThunk<Buses, void>(
     try {
       const response = await fetch("api/busData/busdetails");
       const data = await response.json();
+      console.log(data);
       return data as Buses;
     } catch (error) {
       throw Error("Failed to fetch data");

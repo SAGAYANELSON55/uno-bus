@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import dayjs from "dayjs";
 
-const Home = () => {
+const Home: React.FC<{ mode: string }> = ({ mode }) => {
   const dispatch: AppDispatch = useDispatch();
   const [calledPush, setCalledPush] = useState(false);
   const router = useRouter();
@@ -36,12 +36,24 @@ const Home = () => {
     if (calledPush) {
       return;
     }
-    router.push({
-      pathname: "/buses",
-      query: {
-        search: `${searchData.source} ${searchData.destination}`,
-      },
-    });
+
+    if (mode === "User") {
+      router.push({
+        pathname: "/buses",
+        query: {
+          search: `${searchData.source} ${searchData.destination}`,
+        },
+      });
+    }
+
+    if (mode === "Admin") {
+      router.push({
+        pathname: "/admin/buslist",
+        query: {
+          search: `${searchData.source} ${searchData.destination}`,
+        },
+      });
+    }
     setCalledPush(true);
   };
 
@@ -60,7 +72,7 @@ const Home = () => {
         </p>
 
         <div className={style.search}>
-          <h2>Get Set Go</h2>
+          <h2>{mode === "User" ? "Get Set Go" : "Admin"}</h2>
           <Stack spacing={2}>
             <Autocomplete
               disablePortal

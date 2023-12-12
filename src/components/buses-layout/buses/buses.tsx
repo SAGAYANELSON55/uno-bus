@@ -41,7 +41,7 @@ import Busitem from "./bus";
 import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
 
-const Buseslist: React.FC = () => {
+const Buseslist: React.FC<{ mode: string }> = ({ mode }) => {
   const busesDetails = useSelector((state: RootState) => state.busData);
 
   const router = useRouter();
@@ -57,14 +57,14 @@ const Buseslist: React.FC = () => {
       (bus) => bus.source === search[0] && bus.destination === search[1]
     );
   console.log(search);
-  console.log(buses);
+  console.log(buses, busesDetails?.busData?.model);
 
   return (
     <>
       {search && search[0] !== "null" && search[1] !== "null" && (
         <div className={style.container}>
           {buses.map((bus) => (
-            <Busitem key={bus.busNo} data={bus} />
+            <Busitem key={bus.busNo} data={bus} mode={mode} />
           ))}
         </div>
       )}

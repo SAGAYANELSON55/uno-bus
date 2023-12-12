@@ -34,9 +34,15 @@ function MainHeader() {
   console.log(activeLink);
   return (
     <header className={style.header}>
-      <Link href="/">
-        <div className={style.logo}>Uno Bus</div>
-      </Link>
+      {data?.user.name === "Admin" ? (
+        <Link href="/admin">
+          <div className={style.logo}>Uno Bus</div>
+        </Link>
+      ) : (
+        <Link href="/">
+          <div className={style.logo}>Uno Bus</div>
+        </Link>
+      )}
       <nav>
         <ul>
           {!data && status !== "loading" && (

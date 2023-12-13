@@ -6,16 +6,17 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { busActions } from "@/store/data/bus-details";
 import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 interface Props {
   data: Bus;
-  mode: string;
 }
 
-const Busitem: React.FC<Props> = ({ data, mode }) => {
+const Busitem: React.FC<Props> = ({ data}) => {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const dispatch: AppDispatch = useDispatch();
-
+  const mode = session?.user?.name
   // useEffect(() => {
   //   async function Deletion() {
   //     try {
@@ -47,11 +48,12 @@ const Busitem: React.FC<Props> = ({ data, mode }) => {
         pathname: `/admin/buslist/viewSeat`,
         query: { busno: `${data.busNo}` },
       });
+    } else {
+      router.push({
+        pathname: `./buses/booking`,
+        query: { busno: `${data.busNo}` },
+      });
     }
-    router.push({
-      pathname: `./buses/booking`,
-      query: { busno: `${data.busNo}` },
-    });
   };
 
   function deleteHandler() {

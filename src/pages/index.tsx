@@ -5,6 +5,8 @@ import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
 import { fetchData } from "@/store/data/bus-details";
 import { useEffect } from "react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +25,26 @@ export default function HomePage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Home mode="User" />
+      <Home />
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (session?.user?.name === "Admin") {
+    return {
+      redirect: {
+        destination: "/admin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session: JSON.parse(JSON.stringify(session)),
+    },
+  };
 }

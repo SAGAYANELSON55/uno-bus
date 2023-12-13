@@ -12,18 +12,22 @@ import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
 
-const Home: React.FC<{ mode: string }> = ({ mode }) => {
+const Home: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [calledPush, setCalledPush] = useState(false);
+  const { data, status } = useSession();
   const router = useRouter();
   const busData = useSelector((state: RootState) => state.busData.busData);
+  const [error, setError] = useState(false);
   const [searchData, setSearchData] = React.useState<search>({
     source: null,
     destination: null,
   });
 
+  const mode = data?.user?.name;
   const sourceLabel = Array.from(
     new Set(busData?.buses?.map((bus) => bus.source))
   );
@@ -37,7 +41,7 @@ const Home: React.FC<{ mode: string }> = ({ mode }) => {
       return;
     }
 
-    if (mode === "User") {
+    if (mode !== "Admin") {
       router.push({
         pathname: "/buses",
         query: {
@@ -63,7 +67,7 @@ const Home: React.FC<{ mode: string }> = ({ mode }) => {
   return (
     <>
       <div className={style.container}>
-        <p>
+        <p className={style.logo}>
           Uno
           <span>
             <DirectionsBusFilledIcon fontSize="large" />
@@ -72,17 +76,23 @@ const Home: React.FC<{ mode: string }> = ({ mode }) => {
         </p>
 
         <div className={style.search}>
-          <h2>{mode === "User" ? "Get Set Go" : "Admin"}</h2>
+          <h2>{mode !== "Admin" ? "Get Set Go" : "Admin"}</h2>
           <Stack spacing={2}>
             <Autocomplete
               disablePortal
               id="from-location"
               value={searchData?.source}
               onChange={(event: any, newValue: string | null) => {
-                setSearchData((prev) => ({
-                  ...prev,
-                  source: newValue,
-                }));
+                setError(false);
+                setSearchData((prev) => {
+                  if (prev?.destination && prev.destination === newValue) {
+                    setError(true);
+                  }
+                  return {
+                    ...prev,
+                    source: newValue,
+                  };
+                });
               }}
               className={style.control}
               options={sourceLabel}
@@ -95,10 +105,16 @@ const Home: React.FC<{ mode: string }> = ({ mode }) => {
               className={style.control}
               value={searchData?.destination}
               onChange={(event: any, newValue: string | null) => {
-                setSearchData((prev) => ({
-                  ...prev,
-                  destination: newValue,
-                }));
+                setError(false);
+                setSearchData((prev) => {
+                  if (prev?.source && prev.source === newValue) {
+                    setError(true);
+                  }
+                  return {
+                    ...prev,
+                    destination: newValue,
+                  };
+                });
               }}
               options={destinationLabel}
               sx={{ width: 300 }}
@@ -111,8 +127,17 @@ const Home: React.FC<{ mode: string }> = ({ mode }) => {
                 maxDate={maxDate}
               />
             </LocalizationProvider>
+            {error && (
+              <div>
+                <p className={style.error}>
+                  *source and destination can not be same
+                </p>
+              </div>
+            )}
             <div className={style.actions}>
-              <button onClick={searchHandler}>Search Bus</button>
+              <button onClick={searchHandler} disabled={error}>
+                Search Bus
+              </button>
             </div>
           </Stack>
         </div>

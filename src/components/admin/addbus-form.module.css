@@ -64,3 +64,16 @@
   margin-top: 1rem;
   margin-bottom: 1 rem;
 }
+
+.actions:disabled {
+  color: #7a70e7;
+  cursor: not-allowed;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+  padding: 10px;
+}

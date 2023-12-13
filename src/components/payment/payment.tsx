@@ -34,7 +34,7 @@ const Payment = () => {
   function notify() {
     dispatch(busActions.modifybus({ busno: bus.busNo, seats: seats }));
     console.log(bus);
-
+    setOpen(true)
     setCompleted(true);
 
     // router.push("/buses/booking");

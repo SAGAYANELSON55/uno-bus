@@ -1,7 +1,8 @@
+import Viewseat from "@/components/admin/view-seat";
 import React from "react";
 
-const viewSeat = () => {
-  return <div>viewSeat</div>;
+const ViewSeat = () => {
+  return <Viewseat />;
 };
 
-export default viewSeat;
+export default ViewSeat;

@@ -4,15 +4,21 @@ import { Seat } from "@/models/bus-data";
 import { setSeatLog } from "@/store/data/seat-details";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
+import { useSession } from "next-auth/react";
 
 const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
   const [select, setSelect] = useState(false);
+  const { data: session, status } = useSession();
   const seats = useSelector((state: RootState) => state.seatLog.seats);
   const seatType = data.seatType.split("-")[0];
 
   const dispatch: AppDispatch = useDispatch();
 
+  const mode = session?.user?.name;
   const bookingHandler = useCallback(() => {
+    if (mode === "Admin") {
+      return;
+    }
     console.log(seats.length);
     if (seats.length !== 5 && !data.booked) {
       setSelect((prev) => {
@@ -35,7 +41,7 @@ const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
       setSelect(false);
       dispatch(setSeatLog.removeSeat(data.seatNumber));
     }
-  }, [data, dispatch, select, seats]);
+  }, [data, dispatch, select, seats, mode]);
 
   const cssClass = `${seatType === "seater" ? style.seat : style.sleeper} ${
     select && !data.booked ? style.selected : 0

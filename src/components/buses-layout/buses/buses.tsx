@@ -41,34 +41,35 @@ import Busitem from "./bus";
 import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
 
-const Buseslist: React.FC<{ mode: string }> = ({ mode }) => {
+const Buseslist: React.FC = () => {
   const busesDetails = useSelector((state: RootState) => state.busData);
 
   const router = useRouter();
 
   const search = router.query.search?.toString()?.split(" ");
-  console.log(busesDetails);
-  console.log(router.query.search);
 
-  const buses =
-    search &&
-    search.length === 2 &&
-    busesDetails?.busData?.buses.filter(
-      (bus) => bus.source === search[0] && bus.destination === search[1]
-    );
-  console.log(search);
-  console.log(buses, busesDetails?.busData?.model);
+  const buses = search
+    ? search.length === 2 &&
+      busesDetails?.busData?.buses.filter(
+        (bus) => bus.source === search[0] && bus.destination === search[1]
+      )
+    : busesDetails?.busData?.buses;
 
   return (
     <>
-      {search && search[0] !== "null" && search[1] !== "null" && (
+      {/* {search && search[0] !== "null" && search[1] !== "null" && (
         <div className={style.container}>
-          {buses.map((bus) => (
-            <Busitem key={bus.busNo} data={bus} mode={mode} />
-          ))}
-        </div>
-      )}
-      {!search && (
+        {buses.map((bus) => (
+          <Busitem key={bus.busNo} data={bus} mode={mode} />
+        ))}
+      </div>
+      )} */}
+      <div className={style.container}>
+        {buses.map((bus) => (
+          <Busitem key={bus.busNo} data={bus} />
+        ))}
+      </div>
+      {!buses && (
         <div className={style.loader}>
           <CircularProgress />
         </div>

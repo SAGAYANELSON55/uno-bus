@@ -1,7 +1,8 @@
+import Bookinglogs from "@/components/admin/bookings";
 import React from "react";
 
-const bookings = () => {
-  return <div>bookings</div>;
+const Bookings = () => {
+  return <Bookinglogs />;
 };
 
-export default bookings;
+export default Bookings;

@@ -11,15 +11,8 @@ import { useState } from "react";
 function MainHeader() {
   const dispatch: AppDispatch = useDispatch();
   const { data, status } = useSession();
-  const [activeLink, setActiveLink] = useState({
-    addbus: true,
-    busList: true,
-  });
-  const router = useRouter();
 
-  function activeLinkHandler(identifier: string) {
-    setActiveLink((prev) => ({ ...prev, [identifier]: !prev[identifier] }));
-  }
+  const router = useRouter();
 
   function loginHandler() {
     dispatch(setSeatLog.addpath({ path: router.asPath }));
@@ -31,7 +24,6 @@ function MainHeader() {
     router.push(data.url);
   }
 
-  console.log(activeLink);
   return (
     <header className={style.header}>
       {data?.user.name === "Admin" ? (
@@ -52,29 +44,11 @@ function MainHeader() {
           )}
           {data?.user.name === "Admin" && (
             <div className={style.navLink}>
-              <li
-                className={`${style.link} ${
-                  activeLink.addbus ? "active-Link" : ""
-                }`}
-              >
-                <Link
-                  href="/admin/addbus"
-                  onClick={() => activeLinkHandler("addbus")}
-                >
-                  Add Bus
-                </Link>
+              <li className={`${style.link}`}>
+                <Link href="/admin/addbus">Add Bus</Link>
               </li>
-              <li
-                className={`${style.link} ${
-                  activeLink.busList ? "active-Link" : ""
-                }`}
-              >
-                <Link
-                  href="/admin/buslist"
-                  onClick={() => activeLinkHandler("busList")}
-                >
-                  Bus List
-                </Link>
+              <li className={`${style.link} `}>
+                <Link href="/admin/buslist">Bus List</Link>
               </li>
             </div>
           )}

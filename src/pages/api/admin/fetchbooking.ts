@@ -6,24 +6,23 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<Array<Buses> | undefined> {
-  if (req.method !== "PUT") {
+  if (req.method !== "GET") {
     res.status(402).json({ message: "bad request" });
     return;
   }
+  try {
+    const client = await connectTo();
 
-  const bus = req.body;
+    const db = client.db();
 
-  console.log(bus);
+    const data = await db.collection<Buses>("Booking").find({}).toArray();
 
-  const client = await connectTo();
+    console.log(data);
 
-  const db = client.db();
-
-  const data = await db
-    .collection<Buses>("Buses")
-    .updateOne({ name: "busData" }, { $push: { buses: bus } });
-  console.log(data.acknowledged);
-  res.status(200).json({ message: "bus added successfully" });
+    res.status(200).json({ message: "data updated successfully", data: data });
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
 }
 
 export default handler;

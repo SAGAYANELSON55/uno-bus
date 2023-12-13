@@ -4,7 +4,9 @@ import { Bus } from "@/models/bus-data";
 import Seats from "./seat";
 import Legents from "./legents";
 
-const Seatlayout: React.FC<{ busData: Bus[] }> = ({ busData }) => {
+const Seatlayout: React.FC<{ busData: Bus[]}> = ({
+  busData,
+}) => {
   const busDetails = busData && busData[0];
   console.log(busDetails);
   return (

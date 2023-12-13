@@ -9,7 +9,7 @@ const Admin = () => {
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
-  return <Home mode="Admin" />;
+  return <Home />;
 };
 
 export default Admin;

@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.container p {
+.logo {
   padding-top: 3rem;
   font-size: xx-large;
   font-weight: bold;
@@ -58,6 +58,12 @@
 .actions button:disabled {
   background-color: #293d7e;
   border-color: #fcfcfc;
-
+  cursor: not-allowed;
   opacity: 0.6;
+}
+
+.error {
+  color: rgb(155, 6, 6);
+  font-size: medium;
+  padding: none;
 }

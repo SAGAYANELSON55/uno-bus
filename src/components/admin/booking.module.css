@@ -1,0 +1,27 @@
+.container {
+  border: 1px solid #b1aeae;
+  box-shadow: inset;
+  border-radius: 8px;
+  padding: 20px;
+  padding-top: 10px;
+  margin: 20px;
+  display: flex;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  width: 50%;
+  justify-content: space-between;
+  min-width: 600px;
+  box-shadow: 2px 4px 4px rgba(61, 62, 63, 0.2);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+
+.busno{
+    font-size: large;
+  font-weight: bold;
+}

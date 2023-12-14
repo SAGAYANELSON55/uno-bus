@@ -2,7 +2,6 @@ import { BookingLog } from "@/models/bus-data";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import style from "./bookings.module.css";
-import { CircularProgress } from "@mui/material";
 import Bookinglog from "./booking";
 
 const Bookinglogs = () => {

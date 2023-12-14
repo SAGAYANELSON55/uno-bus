@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import type { Bus, Buses, Seat } from "@/models/bus-data";
+import type { Bus, Buses, Seat, SeatLog } from "@/models/bus-data";
 
 const busDetails = createSlice({
   name: "Bus-details",
@@ -49,6 +49,61 @@ const busDetails = createSlice({
           });
           existingbus.availSeats =
             existingbus.availSeats - action.payload.seats.length;
+
+          return existingbus;
+        }
+        return bus;
+      });
+    },
+    deletebooking(
+      state,
+      action: PayloadAction<{ busno: String; seats: SeatLog[] }>
+    ) {
+      state.busData.buses = state.busData.buses?.map((bus) => {
+        if (bus.busNo === action.payload.busno) {
+          const existingbus = bus;
+          action.payload.seats.map((seat) => {
+            const match = seat.seatNumber.match(/R(\d+)(\d+)/);
+            const rows = +match[1];
+            const col = +match[2];
+            const deck =
+              rows === 1 || rows === 2 || rows === 3
+                ? "lowerDeck"
+                : "upperDeck";
+            const row =
+              deck === "upperDeck"
+                ? `row${rows === 4 ? 1 : rows === 5 ? 2 : rows === 6 ? 3 : 0}`
+                : `row${rows}`;
+            existingbus[`${deck}`][`${row}`][col - 1] = {
+              ...existingbus[`${deck}`][`${row}`][col - 1],
+              name: undefined,
+              age: undefined,
+              gender: undefined,
+              booked: false,
+            };
+            if (seat.gender === "female") {
+              if (rows === 1 || rows === 2 || rows === 4 || rows === 5) {
+                const adjacentrow =
+                  rows === 1
+                    ? 2
+                    : rows === 2
+                    ? 1
+                    : rows === 4
+                    ? 5
+                    : rows === 5
+                    ? 4
+                    : 0;
+                const adjrow =
+                  deck === "upperDeck"
+                    ? `row${adjacentrow === 4 ? 1 : adjacentrow === 5 ? 2 : 0}`
+                    : `row${adjacentrow}`;
+                existingbus[`${deck}`][`${adjrow}`][col - 1].seatConstraint =
+                  false;
+              }
+            }
+          });
+          existingbus.availSeats =
+            existingbus.availSeats + action.payload.seats.length;
 
           return existingbus;
         }

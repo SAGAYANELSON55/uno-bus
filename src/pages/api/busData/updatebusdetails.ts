@@ -13,7 +13,7 @@ async function handler(
 
   const updatedData = await req.body;
 
-  console.log(updatedData[0]);
+  console.log(updatedData);
 
   try {
     const client = await connectTo();
@@ -23,8 +23,8 @@ async function handler(
     const collection = db.collection<Buses>("Buses");
     console.log("working on database");
     const data = await collection.findOneAndUpdate(
-      { "buses.busNo": updatedData[0].busNo },
-      { $set: { "buses.$": updatedData[0] } }
+      { "buses.busNo": updatedData.busNo },
+      { $set: { "buses.$": updatedData } }
     );
 
     const response = data.buses;

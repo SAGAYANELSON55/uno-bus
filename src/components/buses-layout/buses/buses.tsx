@@ -48,27 +48,24 @@ const Buseslist: React.FC = () => {
 
   const search = router.query.search?.toString()?.split(" ");
 
-  const buses = search
-    ? search.length === 2 &&
-      busesDetails?.busData?.buses.filter(
-        (bus) => bus.source === search[0] && bus.destination === search[1]
-      )
-    : busesDetails?.busData?.buses;
+  const buses =
+    search && search[0] !== "null" && search[1] !== "null"
+      ? search.length === 2 &&
+        busesDetails?.busData?.buses.filter(
+          (bus) => bus.source === search[0] && bus.destination === search[1]
+        )
+      : busesDetails?.busData?.buses;
 
   return (
     <>
-      {/* {search && search[0] !== "null" && search[1] !== "null" && (
+      {buses.length !== 0 && (
         <div className={style.container}>
-        {buses.map((bus) => (
-          <Busitem key={bus.busNo} data={bus} mode={mode} />
-        ))}
-      </div>
-      )} */}
-      <div className={style.container}>
-        {buses.map((bus) => (
-          <Busitem key={bus.busNo} data={bus} />
-        ))}
-      </div>
+          {buses.map((bus) => (
+            <Busitem key={bus.busNo} data={bus} />
+          ))}
+        </div>
+      )}
+
       {!buses && (
         <div className={style.loader}>
           <CircularProgress />

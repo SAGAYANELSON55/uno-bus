@@ -5,43 +5,39 @@ import { DeleteOutlined } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { busActions } from "@/store/data/bus-details";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 
 interface Props {
   data: Bus;
 }
+async function Deletion(data: Bus) {
+  try {
+    const result = await fetch("/api/busData/deletebusdata", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-const Busitem: React.FC<Props> = ({ data}) => {
+    if (!result.ok) {
+      const response = await result.json();
+      throw new Error(response.error);
+    }
+
+    const res = await result.json();
+    console.log(res);
+  } catch (error) {
+    console.error(error);
+  }
+}
+const Busitem: React.FC<Props> = ({ data }) => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const dispatch: AppDispatch = useDispatch();
-  const mode = session?.user?.name
-  // useEffect(() => {
-  //   async function Deletion() {
-  //     try {
-  //       const result = await fetch("api/busData/updatebusdetails", {
-  //         method: "PATCH",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       });
+  const mode = session?.user?.name;
 
-  //       if (!result.ok) {
-  //         const response = await result.json();
-  //         throw new Error(response.error);
-  //       }
-
-  //       const res = await result.json();
-  //       console.log(res);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-
-  //   Deletion();
-  // });
   const viewSeatHandler = () => {
     if (mode === "Admin") {
       router.push({
@@ -56,9 +52,11 @@ const Busitem: React.FC<Props> = ({ data}) => {
     }
   };
 
-  function deleteHandler() {
+  async function deleteHandler() {
     console.log("deleting..");
+    Deletion(data);
     dispatch(busActions.deleteBus(data.busNo));
+    console.log(data);
   }
 
   function bookingHandler() {

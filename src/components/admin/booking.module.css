@@ -4,11 +4,13 @@
   border-radius: 8px;
   padding: 20px;
   padding-top: 10px;
+  padding-bottom: 5px;
   margin: 20px;
   display: flex;
   margin-left: 5rem;
   margin-right: 5rem;
   width: 50%;
+  flex-direction: column;
   justify-content: space-between;
   min-width: 600px;
   box-shadow: 2px 4px 4px rgba(61, 62, 63, 0.2);
@@ -18,10 +20,90 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
 }
 
-.busno{
-    font-size: large;
+.busno {
+  font-size: large;
   font-weight: bold;
+}
+
+.statusContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status {
+  color: rgb(18, 83, 18);
+}
+
+.actions button {
+  padding: 10px 10px;
+  background-color: #dd6b6b;
+  color: white;
+  border: none;
+  display: flex;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.actions button:hover {
+  background-color: #e75252;
+  cursor: pointer;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.view {
+  display: flex;
+  justify-content: center;
+}
+
+.view button {
+  padding: 10px 10px;
+  background-color: #212747;
+  color: white;
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.sno {
+  width: 60px;
+}
+.name {
+  width: 200px;
+}
+.Age {
+  width: 80px;
+}
+.seatno {
+  width: 80px;
+}
+
+.gender {
+  width: 100px;
+}
+
+.table-header {
+  background-color: #ebe6e6;
+  font-weight: bold;
+}
+
+.details {
+  margin-top: 10px;
+}
+
+.detailsTable {
+  margin-top: 10px;
+  width: 100%;
 }

@@ -14,3 +14,9 @@
   margin-top: 10rem;
   padding: 10px;
 }
+.error {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+  margin-top: 20px;
+}

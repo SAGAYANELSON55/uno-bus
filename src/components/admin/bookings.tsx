@@ -23,24 +23,18 @@ const Bookinglogs = () => {
     fetchBookings();
   }, []);
 
-  const log: BookingLog[] =
-    search && booking.filter((log) => log.busNo === search);
-  console.log(log);
+  const log: BookingLog[] = booking.filter((log) => log.busNo === search);
+
   return (
     <>
-      {(!log || log.length === 0) && (
-        <div className={style.loader}>
-          <CircularProgress />
-        </div>
-      )}
+      {search && log.length === 0 && <p className={style.error}>No Bookings</p>}
       {log && log.length !== 0 && (
         <div className={style.conatiner}>
           {log.map((book) => (
-            <Bookinglog key={book.busNo} log={book} />
+            <Bookinglog key={book.uid} log={book} />
           ))}
         </div>
       )}
-      ;
     </>
   );
 };

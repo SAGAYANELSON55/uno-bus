@@ -3,10 +3,10 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/index";
-import { BookingLog } from "@/models/bus-data";
+import { BookingLog, Buses } from "@/models/bus-data";
 import { setSeatLog } from "@/store/data/seat-details";
 
-const loadData = async (busData, busno) => {
+export const loadData = async (busData: Buses, busno: string) => {
   try {
     const response = await fetch("/api/busData/updatebusdetails", {
       method: "PATCH",
@@ -27,7 +27,7 @@ const loadData = async (busData, busno) => {
   }
 };
 
-const loadBooking = async (bookingLog) => {
+const loadBooking = async (bookingLog: BookingLog) => {
   try {
     const response = await fetch("/api/bookinglog/bookingdetails", {
       method: "PUT",

@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { busActions } from "@/store/data/bus-details";
 
-const Bookinglog: React.FC<{ log: BookingLog }> = ({ log }) => {
+const Bookinglog: React.FC<{
+  log: BookingLog;
+  update: (busno: string) => void;
+}> = ({ log, update }) => {
   const [booking, setBooking] = useState(log);
   const [view, setView] = useState(false);
   const dispatch: AppDispatch = useDispatch();
@@ -64,6 +67,7 @@ const Bookinglog: React.FC<{ log: BookingLog }> = ({ log }) => {
         })
       );
     }
+    update(booking.busNo);
   }
 
   return (

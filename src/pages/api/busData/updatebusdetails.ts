@@ -23,11 +23,12 @@ async function handler(
     const collection = db.collection<Buses>("Buses");
     console.log("working on database");
     const data = await collection.findOneAndUpdate(
-      { "buses.busNo": updatedData.busNo },
-      { $set: { "buses.$": updatedData } }
+      { "buses.busNo": updatedData[0].busNo },
+      { $set: { "buses.$": updatedData[0] } }
     );
 
     const response = data.buses;
+    console.log(response);
 
     res.status(200).json({ message: "data updated successfully" });
   } catch (error) {

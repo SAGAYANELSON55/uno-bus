@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import style from "./addbus-form.module.css";
 import { hasSpecialCharacter, isNotEmpty, isalpha } from "@/helpers/validation";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { AppDispatch } from "@/store";
 import { Snackbar, Alert } from "@mui/material";
 import { CircularProgress } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { RootState } from "@/store";
+import { fetchData } from "@/store/data/bus-details";
 
 const AddbusForm = () => {
   const model = useSelector((state: RootState) => state.busData.busData.model);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-
+  const dispatch: AppDispatch = useDispatch();
   const initialInput = {
     busName: "",
     busNo: "",
@@ -103,6 +106,9 @@ const AddbusForm = () => {
     });
 
     const res = await data.json();
+    if (res.ok) {
+      dispatch(fetchData());
+    }
     console.log(res);
     console.log(busData);
     setLoading(false);

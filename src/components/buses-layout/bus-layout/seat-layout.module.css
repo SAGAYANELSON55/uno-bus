@@ -13,6 +13,7 @@
   min-width: 500px;
   margin-right: 5px;
   gap: 20px;
+  /* padding-left: 40px; */
 }
 .lowerdeck {
   display: flex;
@@ -22,8 +23,10 @@
 
 .lowerdeck .group {
   display: flex;
+  flex: content;
   flex-direction: column;
   padding: 10px;
+  margin-left: 60px;
   justify-content: space-between;
 }
 .lowerdeck .row1 {
@@ -50,6 +53,7 @@
   display: flex;
   flex-direction: column;
   margin: 10px;
+  margin-left: 60px;
   justify-content: space-between;
 }
 

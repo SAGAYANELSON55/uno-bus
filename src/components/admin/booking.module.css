@@ -9,7 +9,6 @@
   display: flex;
   margin-left: 5rem;
   margin-right: 5rem;
-  width: 50%;
   flex-direction: column;
   justify-content: space-between;
   min-width: 600px;
@@ -106,4 +105,5 @@
 .detailsTable {
   margin-top: 10px;
   width: 100%;
+  margin-left: 10px;
 }

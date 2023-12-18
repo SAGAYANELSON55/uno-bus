@@ -6,8 +6,8 @@ import { setSeatLog } from "@/store/data/seat-details";
 import { useDispatch } from "react-redux";
 import { RootState } from "@/store";
 
-const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
-  function Detailsform({ seat, index }) {
+const DetailsForm: React.FC<{ seat: Seat; index: number; key: string }> =
+  React.memo(function Detailsform({ seat, index }) {
     const dispatch = useDispatch();
     const [enteredValues, setEnteredValues] = useState({
       name: "",
@@ -155,7 +155,6 @@ const DetailsForm: React.FC<{ seat: Seat; index: number }> = React.memo(
         <td>{seat.seatNumber}</td>
       </tr>
     );
-  }
-);
+  });
 
 export default DetailsForm;

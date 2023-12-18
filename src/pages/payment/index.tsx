@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import Payment from "@/components/payment/payment";
 
-
 function payment() {
   return <Payment />;
 }
@@ -17,6 +16,15 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         destination: "/auth",
+        permanent: false,
+      },
+    };
+  }
+
+  if (session && session?.user?.name === "Admin") {
+    return {
+      redirect: {
+        destination: "/roleError",
         permanent: false,
       },
     };

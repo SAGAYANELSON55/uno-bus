@@ -4,7 +4,8 @@ const nextConfig = {
   env: {
     MONGO_URI:
       "mongodb+srv://user1:Intern123@cluster0.rfxlmgt.mongodb.net/onebus?retryWrites=true&w=majority",
-    AUTH_SECRET: " Mx3r5hQHTZ3l7J+GkwzN5p0f7WD3fuP0asIHroKlP34=",
+    AUTH_SECRET: "Mx3r5hQHTZ3l7J+GkwzN5p0f7WD3fuP0asIHroKlP34=",
+
   },
 };
 

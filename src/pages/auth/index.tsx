@@ -1,13 +1,14 @@
 import AuthForm from "@/components/auth/auth-form";
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
+import Loader from "@/components/layout/loader";
 
 export default function Auth() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getSession().then((session) => {
       if (session?.user.name === "Admin") {
         router.replace("/admin");
@@ -21,9 +22,9 @@ export default function Auth() {
     });
   }, [router]);
 
-  // if (isLoading) {
-  //   return <Loader />;
-  // }
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

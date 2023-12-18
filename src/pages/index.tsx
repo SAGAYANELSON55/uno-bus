@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Home from "@/components/home-page/home-page";
 import { Inter } from "next/font/google";
 import { AppDispatch } from "@/store";
@@ -7,10 +6,9 @@ import { fetchData } from "@/store/data/bus-details";
 import { useEffect } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
+import Head from "next/head";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function HomePage() {
+const HomePage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -18,18 +16,19 @@ export default function HomePage() {
   });
 
   return (
-    <>
-      <Head>
+    <div>
+      {/* <Head>
         <title>Create Next App</title>
         <meta name="description" content="Bus ticket booking app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
       <Home />
-    </>
+    </div>
   );
-}
+};
 
+export default HomePage;
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
 

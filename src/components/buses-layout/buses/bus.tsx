@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 
 interface Props {
   data: Bus;
+  key: string;
 }
 async function Deletion(data: Bus) {
   try {
@@ -32,7 +33,7 @@ async function Deletion(data: Bus) {
     console.error(error);
   }
 }
-const Busitem: React.FC<Props> = ({ data }) => {
+const Busitem: React.FC<Props> = ({ data, key }) => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const dispatch: AppDispatch = useDispatch();
@@ -67,7 +68,7 @@ const Busitem: React.FC<Props> = ({ data }) => {
   }
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} key={key}>
       <div className={styles.details}>
         <div className={styles.wrapper}>
           <h2>{data.busName}</h2>

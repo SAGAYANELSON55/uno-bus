@@ -142,7 +142,7 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
     if (reason === "clickaway") {
       return;
     }
-
+    setmessage("User Created !!");
     setOpen(false);
   };
 

@@ -33,7 +33,7 @@ async function Deletion(data: Bus) {
     console.error(error);
   }
 }
-const Busitem: React.FC<Props> = ({ data, key }) => {
+const Busitem: React.FC<Props> = ({ data }) => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const dispatch: AppDispatch = useDispatch();
@@ -68,7 +68,7 @@ const Busitem: React.FC<Props> = ({ data, key }) => {
   }
 
   return (
-    <div className={styles.card} key={key}>
+    <div className={styles.card} key={data.busNo}>
       <div className={styles.details}>
         <div className={styles.wrapper}>
           <h2>{data.busName}</h2>

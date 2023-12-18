@@ -2,11 +2,14 @@ import { hashPassword } from "../../../helpers/auth";
 import { connectTo } from "@/helpers/connect-to";
 import { NextApiRequest, NextApiResponse } from "next";
 
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     res.status(501).json({ message: "Bad Request" });
     return;
   }
+
+  
 
   const { email, password, name } = req.body;
   console.log(email);
@@ -21,6 +24,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       message:
         "Invalid user credentials, Password should be atleast 7 characters",
     });
+    return;
   }
 
   try {
@@ -35,7 +39,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         message: "user already registered try login or use another email",
       });
       throw new Error("user already registered try login or use another email");
-      return;
     }
 
     let result;

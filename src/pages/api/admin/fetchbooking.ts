@@ -1,8 +1,17 @@
 import { connectTo } from "@/helpers/connect-to";
 import { BookingLog, Buses } from "@/models/bus-data";
 import { NextApiRequest, NextApiResponse } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const session = await getServerSession(req, res, authOptions);
+
+  if (!session || session?.user?.name !== "Admin") {
+    res.status(401).json({ message: "not-authorized to perform the action" });
+    return;
+  }
+
   try {
     const client = await connectTo();
 

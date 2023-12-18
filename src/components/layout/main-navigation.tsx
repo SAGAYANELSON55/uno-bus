@@ -7,11 +7,12 @@ import { setSeatLog } from "@/store/data/seat-details";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { useState } from "react";
+import { Snackbar, Alert } from "@mui/material";
 
 function MainHeader() {
   const dispatch: AppDispatch = useDispatch();
   const { data, status } = useSession();
-
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   function loginHandler() {
@@ -20,12 +21,32 @@ function MainHeader() {
   }
 
   async function logoutHandler() {
+    setOpen(true);
     const data = await signOut({ redirect: false, callbackUrl: "/" });
     router.push(data.url);
   }
 
+  const close = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
   return (
     <header className={style.header}>
+      {open && (
+        <Snackbar
+          open={open}
+          autoHideDuration={2000}
+          onClose={close}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert onClose={close} severity="success" sx={{ width: "100%" }}>
+            User Logged out !!!
+          </Alert>
+        </Snackbar>
+      )}
       {data?.user.name === "Admin" ? (
         <Link href="/admin">
           <div className={style.logo}>Uno Bus</div>

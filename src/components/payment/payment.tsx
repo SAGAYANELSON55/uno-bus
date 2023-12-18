@@ -7,6 +7,7 @@ import { CircularProgress } from "@mui/material";
 import PassengerTable from "../buses-layout/passenger-detail/confirm/confirm-form";
 import { Alert, Snackbar } from "@mui/material";
 import { busActions } from "@/store/data/bus-details";
+import Loader from "../layout/loader";
 
 const Payment = () => {
   const router = useRouter();
@@ -48,23 +49,18 @@ const Payment = () => {
   return (
     <>
       {open && (
-        <>
-          <Snackbar
-            open={open}
-            autoHideDuration={3000}
-            onClose={close}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          >
-            <Alert onClose={close} severity="success" sx={{ width: "100%" }}>
-              Payment successfull
-            </Alert>
-          </Snackbar>
-
-          <div className={style.loader}>
-            <CircularProgress />
-          </div>
-        </>
+        <Snackbar
+          open={open}
+          autoHideDuration={3000}
+          onClose={close}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert onClose={close} severity="success" sx={{ width: "100%" }}>
+            Payment successfull
+          </Alert>
+        </Snackbar>
       )}
+
       <div className={style.modal}>
         <div className={style.details}>
           <div className={style.wrapper}>

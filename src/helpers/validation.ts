@@ -22,7 +22,8 @@ export const isEquals = (value: string, otherValue: string) => {
 export const isalpha = (value: string) => {
   const val = value.trim();
   const regex = /^[a-zA-Z]+$/;
-  return regex.test(val);
+  const trim = val.replace(/\s/g, "");
+  return regex.test(trim);
 };
 
 export const hasUppercase = (value: string) => {

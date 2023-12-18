@@ -35,14 +35,22 @@
 
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { AppDispatch, RootState } from "@/store";
 import style from "./buses.module.css";
 import Busitem from "./bus";
 import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { fetchData } from "@/store/data/bus-details";
 
 const Buseslist: React.FC = () => {
   const busesDetails = useSelector((state: RootState) => state.busData);
+
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
 
   const router = useRouter();
 

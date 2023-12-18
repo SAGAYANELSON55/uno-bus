@@ -144,7 +144,7 @@ export const fetchData = createAsyncThunk<Buses, void>(
   "Bus-details/fetchData",
   async () => {
     try {
-      const response = await fetch("api/busData/busdetails");
+      const response = await fetch("/api/busData/busdetails");
       const data = await response.json();
       console.log(data);
       return data as Buses;

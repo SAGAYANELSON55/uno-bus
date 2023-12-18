@@ -110,7 +110,9 @@ const Bookinglog: React.FC<{
             </div>
           )}
           <div className={style.view}>
-            <button onClick={viewHandler}>View Booking</button>
+            <button onClick={viewHandler}>
+              {view ? "close" : "View details"}
+            </button>
           </div>
         </div>
       )}

@@ -22,15 +22,13 @@ async function handler(
 
   const details = await req.body;
 
-  console.log(details);
-
   try {
     const client = await connectTo();
 
     const db = client.db();
 
     const collection = db.collection<Buses>("Buses");
-    console.log("working on database");
+
     const data = await collection.updateOne(
       { name: "busData" },
       { $pull: { buses: { busNo: details.busNo } } }

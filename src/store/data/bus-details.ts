@@ -146,7 +146,7 @@ export const fetchData = createAsyncThunk<Buses, void>(
     try {
       const response = await fetch("/api/busData/busdetails");
       const data = await response.json();
-      console.log(data);
+
       return data as Buses;
     } catch (error) {
       throw Error("Failed to fetch data");

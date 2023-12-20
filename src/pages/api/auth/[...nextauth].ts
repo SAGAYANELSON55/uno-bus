@@ -29,10 +29,6 @@ export const authOptions = {
 
         const userCollection = db.collection("users");
 
-        // const user = await userCollection.findOne({
-        //   email: credentials!.email,
-        // });
-
         const userPromise = userCollection.findOne({
           email: credentials!.email,
         });
@@ -40,9 +36,6 @@ export const authOptions = {
 
         const results = await Promise.all([userPromise, isAdminPromise]);
         const user = results[0];
-        const isAdmin = results[1];
-
-        console.log(isAdmin);
 
         if (!user) {
           console.log("user is not there ");
@@ -58,7 +51,7 @@ export const authOptions = {
           console.log("incorrect password");
           return null;
         }
-        console.log(user.isAdmin);
+
         return {
           id: user._id.toString(),
           email: user.email,

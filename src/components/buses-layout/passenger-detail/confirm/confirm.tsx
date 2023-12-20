@@ -66,14 +66,14 @@ const Confirm: React.FC<confirmProps> = ({ seats, bus, onClose }) => {
                 `}
           </p>
         )}
-        <form method="dialog">
+        <div>
           <button className={style.paybutton} onClick={paymentHandler}>
             confirm
           </button>
           <button className={style.editbutton} onClick={() => onClose()}>
             Edit
           </button>
-        </form>
+        </div>
       </div>
     </dialog>
   );

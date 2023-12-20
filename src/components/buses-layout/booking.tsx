@@ -16,8 +16,6 @@ const Booking = () => {
   const router = useRouter();
 
   const search = router.query.busno && router.query.busno.toString();
-  console.log(search);
-  console.log(busData);
 
   const buses =
     search &&
@@ -29,7 +27,6 @@ const Booking = () => {
   }, [dispatch]);
 
   if (search && buses && buses.length === 0) {
-    console.log("pagenot found");
     router.replace("404.tsx");
   }
 

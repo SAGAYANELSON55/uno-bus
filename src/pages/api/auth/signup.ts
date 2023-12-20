@@ -2,17 +2,13 @@ import { hashPassword } from "../../../helpers/auth";
 import { connectTo } from "@/helpers/connect-to";
 import { NextApiRequest, NextApiResponse } from "next";
 
-
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     res.status(501).json({ message: "Bad Request" });
     return;
   }
 
-  
-
   const { email, password, name } = req.body;
-  console.log(email);
 
   if (
     !email ||
@@ -38,7 +34,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(401).json({
         message: "user already registered try login or use another email",
       });
-      throw new Error("user already registered try login or use another email");
+      // throw new Error("user already registered try login or use another email");
     }
 
     let result;
@@ -56,8 +52,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(201).json({ message: "User Created!!!" });
     const response = result.acknowledged;
-    console.log(response);
-    // return response;
   } catch (error) {
     res.status(500).json({
       message: "Unable to add the user try again after some time",

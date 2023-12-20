@@ -21,8 +21,6 @@ async function handler(
 
   const bus = req.body;
 
-  console.log(bus);
-
   const client = await connectTo();
 
   const db = client.db();
@@ -30,7 +28,7 @@ async function handler(
   const data = await db
     .collection<Buses>("Buses")
     .updateOne({ name: "busData" }, { $push: { buses: bus } });
-  console.log(data.acknowledged);
+
   res.status(200).json({ message: "bus added successfully" });
 }
 

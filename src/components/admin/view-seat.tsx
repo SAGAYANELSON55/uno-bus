@@ -12,13 +12,10 @@ const Viewseat = () => {
   const busData = useSelector(
     (state: RootState) => state.busData.busData.buses
   );
-  console.log(search);
-  console.log(busData);
 
   const buses =
     search && busData !== null && busData.filter((bus) => bus.busNo === search);
 
-  console.log(buses);
   return (
     <>
       {!buses && (

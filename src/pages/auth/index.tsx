@@ -20,7 +20,7 @@ export default function Auth() {
         setIsLoading(false);
       }
     });
-  }, [router]);
+  });
 
   if (isLoading) {
     return <Loader />;

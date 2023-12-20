@@ -10,7 +10,6 @@ async function handler(
     res.status(402).json({ message: "bad request" });
     return;
   }
-  console.log("1");
 
   const client = await connectTo();
 

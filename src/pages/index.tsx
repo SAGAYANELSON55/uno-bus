@@ -17,18 +17,19 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      {/* <Head>
+      <Head>
         <title>Create Next App</title>
         <meta name="description" content="Bus ticket booking app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-      </Head> */}
+      </Head>
       <Home />
     </div>
   );
 };
 
 export default HomePage;
+
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
 

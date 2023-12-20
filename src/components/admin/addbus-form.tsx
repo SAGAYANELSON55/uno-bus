@@ -130,7 +130,7 @@ const AddbusForm = () => {
     setEnteredvalues(initialInput);
     setOpen(false);
   };
-  console.log(loader);
+ 
   return (
     <>
       {loader && (

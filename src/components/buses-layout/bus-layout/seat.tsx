@@ -19,7 +19,7 @@ const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
     if (mode === "Admin") {
       return;
     }
-    console.log(seats.length);
+
     if (seats.length !== 5 && !data.booked) {
       setSelect((prev) => {
         return !prev;

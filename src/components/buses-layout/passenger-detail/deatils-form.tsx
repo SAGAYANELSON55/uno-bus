@@ -4,7 +4,6 @@ import { isNotEmpty, hasMinLength, isalpha } from "@/helpers/validation";
 import style from "./deatils-form.module.css";
 import { setSeatLog } from "@/store/data/seat-details";
 import { useDispatch } from "react-redux";
-import { RootState } from "@/store";
 
 const DetailsForm: React.FC<{ seat: Seat; index: number; key: string }> =
   React.memo(function Detailsform({ seat, index }) {
@@ -66,8 +65,6 @@ const DetailsForm: React.FC<{ seat: Seat; index: number; key: string }> =
       }));
     }, []);
 
-    console.log(ageValid);
-
     useEffect(() => {
       if (didEdit.name && nameValid) {
         dispatch(setSeatLog.addName({ name: enteredValues.name, index }));
@@ -82,7 +79,6 @@ const DetailsForm: React.FC<{ seat: Seat; index: number; key: string }> =
       }
     }, [nameValid, ageValid, didEdit, dispatch, enteredValues, index]);
 
-    console.log(seat);
     return (
       <tr key={seat.seatNumber}>
         <td>{index + 1}</td>

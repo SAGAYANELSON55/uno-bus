@@ -28,11 +28,10 @@ async function handler(
     const db = client.db();
 
     const collection = db.collection<Buses>("Booking");
-    console.log("working on database");
+
     const data = await collection.insertOne(bookingData);
 
     const response = data.acknowledged;
-    console.log(response);
 
     res.status(200).json({ message: "data updated successfully" });
   } catch (error) {

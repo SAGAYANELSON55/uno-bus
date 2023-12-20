@@ -19,7 +19,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     if (req.method === "GET") {
       const data = await db.collection<Buses>("Booking").find({}).toArray();
-      console.log(2);
 
       res
         .status(200)
@@ -29,8 +28,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       const response = await db
         .collection<Buses>("Booking")
         .findOneAndDelete({ uid: detail.uid });
-
-      console.log("patch");
 
       res.status(200).json({ message: "booking deleted" });
     }

@@ -39,7 +39,7 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
   const [createAccount, setCreateAccount] = useState(false);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
-  const [message, setmessage] = useState("user Created!!");
+  const [message, setmessage] = useState("user Created!! Login to continue");
   const initialInput = {
     email: "",
     name: "",
@@ -73,10 +73,6 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
 
   const passwordhasnumber =
     didEdit.password && hasNumber(enteredValues.password);
-  // const passwordIsInvalid =
-  //   didEdit.email &&
-  //   (!isPassword(enteredValues.password) ||
-  //     !hasMinLength(enteredValues.password, 8));
 
   const passwordIsInvalid =
     didEdit.password &&
@@ -142,7 +138,8 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
     if (reason === "clickaway") {
       return;
     }
-    setmessage("User Created !!");
+    setmessage("User Created !! Login to continue");
+    setError(false);
     setOpen(false);
   };
 

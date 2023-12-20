@@ -36,9 +36,8 @@ const Bookinglog: React.FC<{
         }
 
         const result = await data.json();
-        console.log(2);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     }
     if (!booking) {

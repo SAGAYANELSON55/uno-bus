@@ -10,13 +10,12 @@ const Details: React.FC<{ bus: Bus }> = ({ bus }) => {
   const seatDetail = useSelector((state: RootState) => state.seatLog.seats);
   const [invalid, setinValid] = useState(true);
   const [confirm, setConfirm] = useState(false);
-  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     const seats = seatDetail.filter(
       (seat) => seat.name && seat.age && seat.gender
     );
 
-    console.log(seats);
     setinValid(seatDetail.length ? seatDetail.length !== seats.length : true);
   }, [seatDetail]);
 

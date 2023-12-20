@@ -28,7 +28,6 @@ async function Deletion(data: Bus) {
     }
 
     const res = await result.json();
-    console.log(res);
   } catch (error) {
     console.error(error);
   }
@@ -57,7 +56,7 @@ const Busitem: React.FC<Props> = ({ data }) => {
     console.log("deleting..");
     Deletion(data);
     dispatch(busActions.deleteBus(data.busNo));
-    console.log(data);
+  
   }
 
   function bookingHandler() {

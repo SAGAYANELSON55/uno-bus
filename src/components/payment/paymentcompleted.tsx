@@ -21,7 +21,6 @@ export const loadData = async (busData: Buses, busno: string) => {
     }
 
     const result = await response.json();
-    console.log(result);
   } catch (error) {
     console.error(error);
   }
@@ -42,7 +41,6 @@ const loadBooking = async (bookingLog: BookingLog) => {
     }
 
     const result = await response.json();
-    console.log(result);
   } catch (error) {
     console.error(error);
   }
@@ -80,13 +78,11 @@ const PaymentCompleted: React.FC = () => {
       bookedSeats: seats,
     };
 
-    console.log(3);
     loadBooking(bookingLog);
     loadData(busData, busno);
     dispatch(setSeatLog.removepath());
   }
 
-  console.log(4);
   function homeLoader() {
     router.push("/");
   }

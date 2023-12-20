@@ -8,7 +8,7 @@ const Seatlayout: React.FC<{ busData: Bus[]}> = ({
   busData,
 }) => {
   const busDetails = busData && busData[0];
-  console.log(busDetails);
+
   return (
     <div className={style.container}>
       <div className={style.layout}>

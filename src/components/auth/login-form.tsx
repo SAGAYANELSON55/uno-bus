@@ -37,11 +37,6 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
     didEdit.email &&
     (!isEmail(enteredValues.email) || !isNotEmpty(enteredValues.email));
 
-  console.log(
-    (didEdit.email && !isEmail(enteredValues.email)) ||
-      !isNotEmpty(enteredValues.email)
-  );
-
   const passwordminLength =
     didEdit.password && hasMinLength(enteredValues.password, 8);
 
@@ -63,8 +58,6 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
       !passwordhasLowercase ||
       !passwordhasSpecialcharacter ||
       !passwordhasUppercase);
-
-  console.log(emailIsInvalid, passwordIsInvalid);
 
   function handleInputChange(identifier: string, value: string) {
     setInputError(false);
@@ -93,22 +86,21 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
   async function submitHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLogin(true);
-    console.log("logining in.....");
+
     const result = await signIn("credentials", {
       redirect: false,
       email: enteredValues.email,
       password: enteredValues.password,
     });
 
-    console.log(session);
     if (!result!.error) {
       console.log(result);
     } else {
+      console.log("invalid email or password");
       setLogin(false);
       setInputError(true);
     }
   }
-  console.log(session);
 
   if (session?.user.name === "User") {
     router.replace(path);

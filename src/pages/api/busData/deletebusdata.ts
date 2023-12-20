@@ -1,5 +1,5 @@
 import { connectTo } from "@/helpers/connect-to";
-import { Buses } from "@/models/bus-data";
+import { BookingLog, Buses } from "@/models/bus-data";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
@@ -29,12 +29,16 @@ async function handler(
 
     const db = client.db();
 
-    const collection = db.collection<Buses>("Buses");
+    const collection1 = db.collection<Buses>("Buses");
+    const collection2 = db.collection<BookingLog>("Booking");
 
-    const data = await collection.updateOne(
+    const data = await collection1.updateOne(
       { name: "busData" },
       { $pull: { buses: { busNo: details.busNo } } }
     );
+
+    await collection2.deleteMany({ busNo: details.busNo });
+
     const response = data.acknowledged;
 
     res.status(200).json({ message: "data updated successfully" });

@@ -43,8 +43,12 @@ const busDetails = createSlice({
                   deck === "upperDeck"
                     ? `row${adjacentrow === 4 ? 1 : adjacentrow === 5 ? 2 : 0}`
                     : `row${adjacentrow}`;
-                existingbus[`${deck}`][`${adjrow}`][col - 1].seatConstraint =
-                  true;
+                if (
+                  existingbus[`${deck}`][`${adjrow}`][col - 1].booked === false
+                ) {
+                  existingbus[`${deck}`][`${adjrow}`][col - 1].seatConstraint =
+                    true;
+                }
               }
             }
           });
@@ -99,8 +103,12 @@ const busDetails = createSlice({
                   deck === "upperDeck"
                     ? `row${adjacentrow === 4 ? 1 : adjacentrow === 5 ? 2 : 0}`
                     : `row${adjacentrow}`;
-                existingbus[`${deck}`][`${adjrow}`][col - 1].seatConstraint =
-                  false;
+                if (
+                  existingbus[`${deck}`][`${adjrow}`][col - 1].booked === false
+                ) {
+                  existingbus[`${deck}`][`${adjrow}`][col - 1].seatConstraint =
+                    false;
+                }
               }
             }
           });

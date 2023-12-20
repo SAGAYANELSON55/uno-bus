@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 
+//api to add booking data to the server
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -13,6 +14,7 @@ async function handler(
     return;
   }
 
+  //check for valid admin session
   const session = await getServerSession(req, res, authOptions);
 
   if (!session) {

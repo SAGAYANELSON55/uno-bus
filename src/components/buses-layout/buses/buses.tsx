@@ -48,6 +48,7 @@ const Buseslist: React.FC = () => {
 
   const dispatch: AppDispatch = useDispatch();
 
+  //fetch bus data and update the store
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);

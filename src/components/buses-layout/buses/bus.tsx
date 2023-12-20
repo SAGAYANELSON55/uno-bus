@@ -52,11 +52,11 @@ const Busitem: React.FC<Props> = ({ data }) => {
     }
   };
 
+
+  //function to delete bus data in the admin mode
   async function deleteHandler() {
-    console.log("deleting..");
     Deletion(data);
     dispatch(busActions.deleteBus(data.busNo));
-  
   }
 
   function bookingHandler() {

@@ -11,6 +11,7 @@ import Head from "next/head";
 const HomePage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
+  //Initial load of data to the redux store
   useEffect(() => {
     dispatch(fetchData());
   });
@@ -29,6 +30,8 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
+
+//check for  admin session
 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);

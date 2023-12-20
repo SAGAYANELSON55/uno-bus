@@ -55,6 +55,8 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
     password: false,
     confirmPassword: false,
   });
+
+  //check for validity of the user input
   let emailIsInvalid =
     didEdit.email &&
     (!isEmail(enteredValues.email) || !isNotEmpty(enteredValues.email));
@@ -113,6 +115,7 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
     switchHandler();
   }
 
+  //function to create the new user
   async function submitHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const userData = {

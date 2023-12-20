@@ -19,6 +19,7 @@ const combinedReducer = combineReducers({
   seatLog: seatLog,
 });
 
+//initializing the bus data as persisted store
 typeof window != "undefined";
 const persistConfig = {
   key: "busTicketBookingApp",

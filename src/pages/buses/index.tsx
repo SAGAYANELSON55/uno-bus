@@ -9,6 +9,8 @@ function Buses() {
 
 export default Buses;
 
+//restrict the access to the user page for admin session
+
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
 

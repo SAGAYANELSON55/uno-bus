@@ -9,13 +9,15 @@ function payment() {
 
 export default payment;
 
+//restrict the access to the user page for admin session and check for valid user session
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (!session) {
     return {
       redirect: {
-        destination: "/auth",
+        destination:
+          "/auth?message=Please%20log%20in%20to%20access%20this%20page",
         permanent: false,
       },
     };

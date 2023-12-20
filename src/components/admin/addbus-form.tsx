@@ -39,6 +39,7 @@ const AddbusForm = () => {
 
   const [loader, setLoader] = useState(false);
 
+  //check for validity from the user input
   const nameIsInvalid =
     didEdit.busName &&
     (!isNotEmpty(enteredValues.busName) || !isalpha(enteredValues.busName));
@@ -82,6 +83,8 @@ const AddbusForm = () => {
       [identifier]: true,
     }));
   }
+
+  //function to add bus data to the server and store
 
   async function addbusHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -130,7 +133,7 @@ const AddbusForm = () => {
     setEnteredvalues(initialInput);
     setOpen(false);
   };
- 
+
   return (
     <>
       {loader && (

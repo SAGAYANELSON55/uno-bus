@@ -9,12 +9,15 @@ import { useSession } from "next-auth/react";
 const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
   const [select, setSelect] = useState(false);
   const { data: session, status } = useSession();
+
   const seats = useSelector((state: RootState) => state.seatLog.seats);
   const seatType = data.seatType.split("-")[0];
 
   const dispatch: AppDispatch = useDispatch();
 
   const mode = session?.user?.name;
+
+  //mark the seat as booked in a seperate seatlog store
   const bookingHandler = useCallback(() => {
     if (mode === "Admin") {
       return;
@@ -65,20 +68,3 @@ const Seats: React.FC<{ data: Seat }> = React.memo(function Item({ data }) {
 });
 
 export default Seats;
-
-{
-  /* {seatType === "Sleeper" && (
-        <div
-          className={`${style.sleeper} ${
-            data.booked ? style.booked : data.seatConstraint ? style.locked : ""
-          } ${data.gender === "female" ? style.female : ""} ${
-            data.seatConstraint
-          } `}
-          key={data.seatNumber}
-          id={data.seatNumber}
-          onClick={bookingHandler}
-        >
-          {data.seatNumber}
-        </div>
-      )} */
-}

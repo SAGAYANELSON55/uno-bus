@@ -9,6 +9,7 @@ const busDetails = createSlice({
     error: null as string | null,
   },
   reducers: {
+    //add booked seat to the bus data in store
     modifybus(state, action: PayloadAction<{ busno: String; seats: Seat[] }>) {
       state.busData.buses = state.busData.buses?.map((bus) => {
         if (bus.busNo === action.payload.busno) {
@@ -55,6 +56,7 @@ const busDetails = createSlice({
         return bus;
       });
     },
+    //delete entire booking from the bus data
     deletebooking(
       state,
       action: PayloadAction<{ busno: String; seats: SeatLog[] }>
@@ -110,6 +112,7 @@ const busDetails = createSlice({
         return bus;
       });
     },
+    //clear the entire bus data
     clearbus(state) {
       state = {
         busData: null as Buses | null,
@@ -117,6 +120,7 @@ const busDetails = createSlice({
         error: null as string | null,
       };
     },
+    //delete bus from bus data in store
     deleteBus(state, action: PayloadAction<string>) {
       state.busData.buses = state.busData.buses.filter(
         (bus) => bus.busNo !== action.payload
@@ -140,6 +144,7 @@ const busDetails = createSlice({
   },
 });
 
+//fetch bus data
 export const fetchData = createAsyncThunk<Buses, void>(
   "Bus-details/fetchData",
   async () => {

@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 
+//api to delete particular bus data from the server
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -13,6 +14,7 @@ async function handler(
     return;
   }
 
+  //validity check for admin session
   const session = await getServerSession(req, res, authOptions);
 
   if (!session || session?.user?.name !== "Admin") {

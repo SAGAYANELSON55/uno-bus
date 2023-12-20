@@ -19,6 +19,8 @@ const Bookinglog: React.FC<{
   );
   const date = booking?.timestamp.split("@");
   const bus = busData.filter((bus) => bus.busNo === log.busNo);
+
+  //load the booking details and update busdata in the server
   useEffect(() => {
     async function loadData() {
       try {
@@ -49,6 +51,7 @@ const Bookinglog: React.FC<{
     setView((prev) => !prev);
   }
 
+  //function to handle the deletion logic of bookings
   async function deleteHandler() {
     setBooking(null);
     const data = await fetch("/api/admin/fetchbooking", {

@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 
+//api to add bus data to the database
+
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -12,6 +14,8 @@ async function handler(
     res.status(402).json({ message: "bad request" });
     return;
   }
+
+  //check for valid admin session
   const session = await getServerSession(req, res, authOptions);
 
   if (!session || session?.user?.name !== "Admin") {

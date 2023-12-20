@@ -8,6 +8,8 @@ export default function Auth() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
+  //redirect logic after successfull login
+
   useLayoutEffect(() => {
     getSession().then((session) => {
       if (session?.user.name === "Admin") {

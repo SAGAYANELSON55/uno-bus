@@ -2,6 +2,7 @@ import { connectTo } from "@/helpers/connect-to";
 import { Buses } from "@/models/bus-data";
 import { NextApiRequest, NextApiResponse } from "next";
 
+//api to get the list of all bus details from the server
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse

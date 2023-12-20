@@ -4,7 +4,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 
+//api to fetch booking details from the server
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  //check for valid admin session
+
   const session = await getServerSession(req, res, authOptions);
 
   if (!session || session?.user?.name !== "Admin") {

@@ -21,6 +21,8 @@ const Bookinglogs = () => {
   const busData = useSelector((state: RootState) => state.busData.busData);
 
   const search = router.query.busno && router.query.busno.toString();
+
+  //fetch booking from the server
   useEffect(() => {
     async function fetchBookings() {
       try {
@@ -38,6 +40,7 @@ const Bookinglogs = () => {
 
   let log: BookingLog[];
 
+  //function to update the bus data when deleted
   const updateBusData = async (busno: string) => {
     setOpen(true);
     await loadData(busData, busno);

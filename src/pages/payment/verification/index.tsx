@@ -9,6 +9,7 @@ const index = () => {
 
 export default index;
 
+//restrict the access to the user page for admin session and check for valid user session
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
 

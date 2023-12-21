@@ -31,10 +31,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const existingUser = await db.collection("users").findOne({ email });
 
     if (existingUser) {
-      res.status(401).json({
-        message: "user already registered try login or use another email",
-      });
-      // throw new Error("user already registered try login or use another email");
+      // res.status(401).json({
+      //   message: "user already registered try login or use another email",
+      // });
+      throw new Error("user already registered try login or use another email");
     }
 
     let result;

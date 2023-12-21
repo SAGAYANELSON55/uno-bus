@@ -34,7 +34,7 @@ const DetailsForm: React.FC<{ seat: Seat; index: number; key: string }> =
       didEdit.age && (+enteredValues.age < 5 || +enteredValues.age > 100);
 
     const ageValid =
-      (+enteredValues.age > 5 && +enteredValues.age < 100) ||
+      (+enteredValues.age > 5 && +enteredValues.age <= 100) ||
       enteredValues.age === "";
 
     const handleInputChange = useCallback(

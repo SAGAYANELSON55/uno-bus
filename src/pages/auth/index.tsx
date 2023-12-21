@@ -12,7 +12,6 @@ export default function Auth() {
 
   useLayoutEffect(() => {
     getSession().then((session) => {
-      console.log(session);
       if (session?.user.name === "Admin") {
         router.replace("/admin");
       }

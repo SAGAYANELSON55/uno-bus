@@ -1,17 +1,15 @@
-import { Autocomplete, Button, Stack, TextField } from "@mui/material";
+import { Autocomplete, Stack, TextField } from "@mui/material";
 import style from "./home-page.module.css";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import DirectionsBusFilledIcon from "@mui/icons-material/DirectionsBusFilled";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { RootState, AppDispatch } from "@/store";
 import { search } from "@/models/bus-data";
-import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
 

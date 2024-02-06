@@ -40,7 +40,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-right: 3rem;
+  margin-right: 1.5rem;
 }
 
 .link {
@@ -69,4 +69,35 @@
 .header button:hover {
   background-color: #5a6ea7;
   color: #d8cfdf;
+}
+.userlogo {
+  padding: 8px 9px;
+  border-radius: 50%;
+  border: 1px solid white;
+  color: #d8cfdf;
+  font-size: large;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+
+.backdrop {
+  display: flex;
+}
+.profileName {
+  display: none;
+}
+
+.profile:hover {
+  cursor: pointer;
+}
+
+.profile:hover .profileName {
+  display: flex;
+  border: 1px solid rgb(2, 2, 2);
+  background-color: white;
+  margin: 2px;
+  overflow: visible;
+  padding: 2px;
+  color: #070707;
+  position: absolute;
 }

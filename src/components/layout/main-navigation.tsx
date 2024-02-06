@@ -13,6 +13,7 @@ function MainHeader() {
   const dispatch: AppDispatch = useDispatch();
   const { data, status } = useSession();
   const [open, setOpen] = useState(false);
+
   const router = useRouter();
 
   function loginHandler() {
@@ -32,6 +33,7 @@ function MainHeader() {
     }
     setOpen(false);
   };
+  3;
 
   return (
     <header className={style.header}>
@@ -43,7 +45,7 @@ function MainHeader() {
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <Alert onClose={close} severity="success" sx={{ width: "100%" }}>
-            User Logged out !!!
+            Logged out !!!
           </Alert>
         </Snackbar>
       )}
@@ -71,6 +73,13 @@ function MainHeader() {
               <li className={`${style.link} `}>
                 <Link href="/admin/buslist">Bus List</Link>
               </li>
+            </div>
+          )}
+
+          {data?.user.name && (
+            <div className={style.profile}>
+              <a className={style.userlogo}>{data.user.name[0]}</a>
+              <div className={style.profileName}>{data.user.name}</div>
             </div>
           )}
           {data && (

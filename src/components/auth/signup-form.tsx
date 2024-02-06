@@ -23,15 +23,15 @@ async function createUser(userData: userData) {
         "Content-Type": "application/json",
       },
     });
-
+    // Check if the status code is in the 2xx range
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Something went wrong");
+      throw new Error("Failed to create user");
     }
     const data = await response.json();
+
     return data;
   } catch (error) {
-    throw error;
+    throw new Error("Failed to create user");
   }
 }
 
@@ -126,9 +126,10 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
     try {
       setCreateAccount(true);
       const result = await createUser(userData);
+
       setCreateAccount(false);
       setOpen(true);
-      setTimeout(() => switchHandler(), 3200);
+      setTimeout(() => switchHandler(), 2500);
     } catch (error) {
       setError(true);
       setCreateAccount(false);
@@ -151,7 +152,7 @@ const Signup: React.FC<SignupProps> = ({ switch: switchHandler }) => {
       {open && (
         <Snackbar
           open={open}
-          autoHideDuration={3000}
+          autoHideDuration={2700}
           onClose={close}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >

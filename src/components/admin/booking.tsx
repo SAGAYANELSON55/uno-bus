@@ -79,6 +79,7 @@ const Bookinglog: React.FC<{
           <div className={style.wrapper}>
             <div className={style.details}>
               <div className={style.busno}>{`BusNo : ${booking.busNo}`}</div>
+              <div>{`username: ${booking.name}`}</div>
               <div>{`Date : ${date[0]}`}</div>
               <div>{`Time: ${date[1]}`}</div>
               <div className={style.status}>{`status : ${booking.status}`}</div>

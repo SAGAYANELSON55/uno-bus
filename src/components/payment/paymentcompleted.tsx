@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/index";
 import { BookingLog, Buses } from "@/models/bus-data";
 import { setSeatLog } from "@/store/data/seat-details";
+import { useSession } from "next-auth/react";
 
 export const loadData = async (busData: Buses, busno: string) => {
   try {
@@ -52,6 +53,7 @@ const PaymentCompleted: React.FC = () => {
   const seatData = useSelector((state: RootState) => state.seatLog);
   const busno = seatData.pathname.split("=")[1];
   const seats = seatData.seats;
+  const { data, status } = useSession();
 
   const router = useRouter();
 
@@ -74,6 +76,7 @@ const PaymentCompleted: React.FC = () => {
       status: "successful",
       timestamp: timestamp,
       uid: +new Date(),
+      name: data?.user.name,
       busNo: busno,
       bookedSeats: seats,
     };

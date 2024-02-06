@@ -1,5 +1,4 @@
 import Home from "@/components/home-page/home-page";
-import { Inter } from "next/font/google";
 import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
 import { fetchData } from "@/store/data/bus-details";

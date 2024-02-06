@@ -31,10 +31,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const existingUser = await db.collection("users").findOne({ email });
 
     if (existingUser) {
-      // res.status(401).json({
-      //   message: "user already registered try login or use another email",
-      // });
-      throw new Error("user already registered try login or use another email");
+      res.status(422).json({
+        message: "user already registered try login or use another email",
+      });
+      return;
     }
 
     let result;
@@ -54,7 +54,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const response = result.acknowledged;
   } catch (error) {
     res.status(500).json({
-      message: "Unable to add the user try again after some time",
+      error:
+        error.message || "Unable to add the user try again after some time",
     });
   }
 }

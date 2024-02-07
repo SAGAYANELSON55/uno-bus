@@ -55,7 +55,7 @@ export const authOptions = {
         return {
           id: user._id.toString(),
           email: user.email,
-          name: user.isAdmin === true ? "Admin" : 'User',
+          name: user.isAdmin === true ? "Admin" : user.name,
         };
       },
     }),

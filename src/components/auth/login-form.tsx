@@ -118,7 +118,9 @@ const Login: React.FC<LoginProps> = ({ switch: switchHandler }) => {
     }
   }
 
+  console.log(session);
   if (session && session?.user.name !== "Admin") {
+    console.log("hello", session);
     router.replace(path);
   }
   if (session?.user.name === "Admin") {

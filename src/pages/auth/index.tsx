@@ -45,6 +45,8 @@ export default function Auth({ isLoading }) {
     return <Loader />;
   }
 
+  console.log(isLoading);
+
   return <AuthForm />;
 }
 

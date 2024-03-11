@@ -12,16 +12,18 @@ const Details: React.FC<{ bus: Bus }> = ({ bus }) => {
   const [confirm, setConfirm] = useState(false);
 
   useEffect(() => {
-    const seats = seatDetail.filter(
-      (seat) => seat.name && seat.age && seat.gender
-    );
-
+    const seats = seatDetail.filter((seat) => {
+      console.log(seat.name, seat.age, seat.gender);
+      return seat.name && seat.age && seat.gender;
+    });
+    console.log(seats);
+    console.log(seatDetail.length, seats.length);
     setinValid(seatDetail.length ? seatDetail.length !== seats.length : true);
   }, [seatDetail]);
 
   function confirmhandler() {
     if (!invalid) {
-      setConfirm((prev) => !prev);
+      setConfirm(true);
     }
   }
 

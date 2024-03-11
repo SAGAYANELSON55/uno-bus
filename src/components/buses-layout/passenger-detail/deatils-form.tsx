@@ -66,12 +66,20 @@ const DetailsForm: React.FC<{ seat: Seat; index: number; key: string }> =
     }, []);
 
     useEffect(() => {
-      if (didEdit.name && nameValid) {
-        dispatch(setSeatLog.addName({ name: enteredValues.name, index }));
+      if (didEdit.name) {
+        if (nameIsInvalid) {
+          dispatch(setSeatLog.addName({ name: undefined, index }));
+        } else {
+          dispatch(setSeatLog.addName({ name: enteredValues.name, index }));
+        }
       }
 
-      if (didEdit.age && ageValid) {
-        dispatch(setSeatLog.addAge({ age: enteredValues.age, index }));
+      if (didEdit.age) {
+        if (ageIsInvalid) {
+          dispatch(setSeatLog.addAge({ age: undefined, index }));
+        } else {
+          dispatch(setSeatLog.addAge({ age: enteredValues.age, index }));
+        }
       }
 
       if (didEdit.gender) {
